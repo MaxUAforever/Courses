@@ -12,6 +12,7 @@
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
+    session.setAttribute("name", "lecturer");
     //request.setAttribute("course_id", "4");
     String course_id = request.getParameter("course_id");
 
@@ -94,7 +95,7 @@
             rs = pst.executeQuery();
             request.setAttribute("current_test", null);
             if(rs.next()) {
-                request.setAttribute("current_test", rs.getString("current"));
+                request.setAttribute("current_test", rs.getInt("current"));
             }
     //response.sendRedirect("course.jsp");
 %>
@@ -136,7 +137,7 @@
         <button type="button" name="button" onclick="pageRedirect('addlecture.jsp?course_id=<%=course_id%>')">Add lecture</button>
     </div>
     <div id="addExam">
-        <button type="button" name="button">Add exam</button>
+        <button type="button" onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&edit=true')" name="button">Add exam</button>
     </div>
     <%}%>
 </div>
@@ -170,11 +171,11 @@
     <h2 id="lessonsTitle">Lessons</h2>
 
     <%
-    boolean flag = false;
-    if (request.getAttribute("current_test") == null)
-        flag = true;
+        boolean flag = false;
+        if (request.getAttribute("current_test") == null)
+            flag = true;
 
-    for (int i = 1; i < n; i++){
+        for (int i = 1; i < n; i++){
     %>
     <div id="lectureInfo">
         <div id="lectureHead">
@@ -189,29 +190,12 @@
             <p id="lorem"><%=request.getAttribute("less_description"+i)%></p>
         </div>
         <div id="bottom">
-            <%if ((flag)&&(request.getAttribute("less_test"+i) != null))
-            {
-                if (!user.equals(request.getAttribute("course_lecturer")))
-                {%>
-                    <h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3>
-                    <%flag = false;
-                }
-                else if (user.equals(request.getAttribute("course_lecturer")))
-                {%>
-                    <h3><a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a></h3>
-                <%}
-            }
-            else
-            {
-                if (user.equals(request.getAttribute("course_lecturer")))
-                {%>
-            <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
-                <%}
-            }%>
-
+            <%if ((flag)&&(request.getAttribute("less_test"+i) != null)&&(!user.equals(request.getAttribute("course_lecturer"))))
+                {%><h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3><% flag = false;
+            }else if (user.equals(request.getAttribute("course_lecturer"))){%><h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3><%}%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>
             <div id="buttOfLectureInfo">
-                <button type="button" name="button">Edit</button>
+                <button type="button" onclick="pageRedirect('editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>')" name="button">Edit</button>
                 <button type="button" onclick="openPopUpLess('<%=request.getAttribute("less_id"+i)%>')" name="button">Delete</button>
             </div>
             <%}%>
