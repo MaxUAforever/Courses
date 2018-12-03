@@ -49,8 +49,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addlecture.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/jsp/addlecture.jsp">
+      <file leaf-file-name="addcourse.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/jsp/addcourse.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="703">
               <caret line="58" column="66" lean-forward="true" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
@@ -145,6 +145,9 @@
       <find>color</find>
       <find>stud</find>
       <find>mark</find>
+      <find>add</find>
+      <find>addT</find>
+      <find>course_lecturer</find>
       <find>heh</find>
     </findStrings>
   </component>
@@ -162,7 +165,6 @@
         <option value="$PROJECT_DIR$/web/jsp/loginprocess.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/js/admin.js" />
         <option value="$PROJECT_DIR$/web/jsp/css/admin.css" />
-        <option value="$PROJECT_DIR$/web/jsp/editsavecourse.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/js/addlecture.js" />
         <option value="$PROJECT_DIR$/web/jsp/createprocess.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/js/course.js" />
@@ -192,7 +194,6 @@
         <option value="$PROJECT_DIR$/web/jsp/editlecturenew.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/editlecture.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/editlectureconfirm.jsp" />
-        <option value="$PROJECT_DIR$/web/jsp/course.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/addtestprocess.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/passtest.jsp" />
         <option value="$PROJECT_DIR$/web/jsp/js/addtest.js" />
@@ -456,7 +457,8 @@
       <workItem from="1543402231724" duration="10484000" />
       <workItem from="1543524312205" duration="939000" />
       <workItem from="1543581442038" duration="1262000" />
-      <workItem from="1543592587056" duration="1166000" />
+      <workItem from="1543592587056" duration="10698000" />
+      <workItem from="1543833147552" duration="3663000" />
     </task>
     <servers />
   </component>
@@ -730,29 +732,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/addlectureconfirm.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="116" selection-end-column="74" />
+        <state relative-caret-position="346">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/lecturer.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/lecture.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/addtest.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="84" column="7" lean-forward="true" selection-end-line="84" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/jsp/student.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
+        <state relative-caret-position="17">
           <caret line="145" column="61" selection-start-line="145" selection-start-column="61" selection-end-line="145" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/lecturertocheck.jsp">
+    <entry file="file://$PROJECT_DIR$/web/jsp/js/addtest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        <state relative-caret-position="17">
+          <caret line="102" column="37" selection-start-line="102" selection-start-column="28" selection-end-line="102" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/addtestprocess.jsp">
+    <entry file="file://$PROJECT_DIR$/web/jsp/edittest.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="825">
+          <caret line="107" column="48" selection-start-line="107" selection-start-column="48" selection-end-line="107" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/course.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="169" column="38" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="169" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/passtest.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1034">
+          <caret line="79" column="2" lean-forward="true" selection-start-line="79" selection-start-column="2" selection-end-line="79" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/addcourse.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
@@ -784,7 +824,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/jsp/addtest.jsp">
+    <entry file="file://$PROJECT_DIR$/web/jsp/addlecture.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/jsp/addcourseprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="52" column="66" lean-forward="true" selection-start-line="52" selection-start-column="66" selection-end-line="52" selection-end-column="66" />

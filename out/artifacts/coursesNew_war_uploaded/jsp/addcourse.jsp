@@ -8,10 +8,12 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/addlecture.css">
     <script src="js/addcourse.js"></script>
+
 </head>
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
+
     /*String c_id = request.getParameter("course_id");
 
     Class.forName("com.mysql.jdbc.Driver");

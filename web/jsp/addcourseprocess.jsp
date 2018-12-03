@@ -14,16 +14,19 @@
 </head>
 <body>
 <%
+
     //String course_lecturer = request.getParameter("course_lecturer");
     String course_name = request.getParameter("course_title");
     String course_theme = request.getParameter("theme");
     String course_description = request.getParameter("description");
+
 
     Class.forName("com.mysql.jdbc.Driver");
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     System.out.println(course_name + " " + course_theme + " " + course_description);
+
 
     try {
         pst = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
@@ -34,7 +37,9 @@
     pst.executeQuery();
 
     try {
+
         pst = conn.prepareStatement("INSERT INTO course (lecturer, course_name, theme, description) VALUES (?, ?, ?, ?)");
+
     } catch (SQLException e) {
         out.println("SQL query creating error");
     }
@@ -48,6 +53,7 @@
         request.setAttribute("textMsg", "Course created!");
     } else
         request.setAttribute("textMsg", "Course creating failed!");
+
     try {
         pst = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1");
     } catch (SQLException e) {
@@ -55,6 +61,8 @@
 
     }
     %>
+
 <jsp:include page="lecturer.jsp" flush="true" />
+
 </body>
 </html>
