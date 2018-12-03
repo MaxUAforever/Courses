@@ -211,9 +211,6 @@ function add_answers(elem){
                 coef.setAttribute("value", "0");
                 coef.setAttribute("min", "0");
 
-                var heh = document.getElementById("heh");
-                heh.innerHTML += cur_q_num + "ans" + ((i-1)/4) + "<br>";
-
                 par.appendChild(answer_div);
                 par.appendChild(answer_area);
                 par.appendChild(lbl2);

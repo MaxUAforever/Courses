@@ -50,7 +50,7 @@
     <%System.out.println("id: " + l_id);%>
     <form class = "rightcol" id="rightcol_id" action="addtestprocess.jsp">
         <div class="material_title" data-medium-editor-element="true">Questions</div>
-       <!-- <div class="edit_test" id="edit_test_id" name="test">
+        <!-- <div class="edit_test" id="edit_test_id" name="test">
             <label class="lbl">Number of answers (2-10):</label>
             <input type="number" id="number_id" value="2" min="2" max="10" onchange="add_answers(this);"/>
             <label class="lbl">Mark for question:</label>
@@ -81,9 +81,6 @@
     </form>
 </div>
 <br>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div id="heh">heh</div>
 </body>
 </html>
 
