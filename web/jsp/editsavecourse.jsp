@@ -6,7 +6,7 @@
 </head>
 <body>
 <%
-    System.out.println("Meow tut ");
+    System.out.println("Meow tut");
     String course_id = request.getParameter("course_id");
     if (request.getParameter("edit").equals("false")) {
         request.setAttribute("edit", "true");

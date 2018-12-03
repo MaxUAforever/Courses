@@ -198,14 +198,14 @@
                 }
                 else if (user.equals(request.getAttribute("course_lecturer")))
                 {%>
-                    <h3><a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a></h3>
+                    <h3><a id="testRef" href="edittest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Edit test</a></h3>
                 <%}
             }
             else
             {
                 if (user.equals(request.getAttribute("course_lecturer")))
                 {%>
-            <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
+                    <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
                 <%}
             }%>
 
@@ -219,8 +219,8 @@
     </div>
     <%
         if ((request.getAttribute("current_test") != null)&&(request.getAttribute("current_test").toString().equals(request.getAttribute("less_id"+i).toString())))
-        flag = true;
-        }
+            flag = true;
+    }
     %>
 
     <!--<div id="lectureInfo">
