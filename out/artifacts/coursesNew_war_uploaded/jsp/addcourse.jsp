@@ -1,68 +1,76 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Course Title</title>
+    <title>Header part</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type = "text/css" href="css/course.css">
-    <script src="js/course.js"></script>
+    <link rel="stylesheet" href="css/addlecture.css">
+    <script src="js/addcourse.js"></script>
+
 </head>
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
-    /*Class.forName("com.mysql.jdbc.Driver");
+
+    /*String c_id = request.getParameter("course_id");
+
+    Class.forName("com.mysql.jdbc.Driver");
+
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
-    PreparedStatement pst = null;*/
+    PreparedStatement pst = null;
 
-    String user = "lecturer";//session.getAttribute("name").toString();
+    try {
+        pst = conn.prepareStatement("SELECT course_name FROM course WHERE id=?");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, c_id);
+
+    ResultSet rs = pst.executeQuery();
+    if(rs.next()) {
+        request.setAttribute("course_name", rs.getString("course_name"));
+    }*/
 %>
-
-<div id="coursetitle">
-    <h1 id="title">Course information</h1>
-    <div id="voiceBlock"></div>
-    <!--<h4 id="voice">100 voices</h4>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    </div>-->
-</div>
-<div id="titleLine">
-    <hr align="center" width="95%" size="2" color="#000000" />
-    <br />
-</div>
-<!-- End title block -->
-<!-- Main block -->
-<!-- navigate block -->
-<div class="leftCol">
-    <div id="navig">
-        <h2 id="navTitle">Place for your education plan</h2>
+<div class="main_layer">
+    <div class="title" id="course_title">New course</div>
+    <hr>
+    <div class="leftcol">
+        <button class="button" id="button_main" onclick="save_course();">Save course</button>
     </div>
-    <%System.out.println(user.equals(request.getAttribute("course_lecturer"))+" "+user+" "+request.getAttribute("course_lecturer"));%>
-</div>
-<!-- End navigate block -->
-<!-- main part -->
-<div class="rightCol">
-    <div id="courseInfo">
-        <h2 id="courseInfoTitle" contenteditable="true">Enter course title...</h2>
-        <div id="themeBlock">
-            <h3 id="theme">Theme:</h3>
-            <div id="themeOfCourse" contenteditable="true">Enter your theme...</div>
-        </div>
-        <h3 id="desc">Description:</h3>
-        <div id="text">
-            <p id="lorem" contenteditable="true">Enter your description of course...</p>
-        </div>
-
-        <div id="buttOfCourseInfo">
-            <button type="button" onclick="call();" name="button">Save</button>
-            <button type="button" onclick="openPopUpConf();" name="button">Cancel</button>
-        </div>
+    <div class = "rightcol" id="rightcol_id">
+        <div class="edit_input_title" id="edit_input_title_id" contenteditable="true" data-placeholder="Enter course title..." spellcheck="true"
+             data-medium-editor-element="true" role="textbox"></div>
+        <div class="material_title" data-medium-editor-element="true">Theme</div>
+        <div class="edit_input_text" id = "edit_input_text" name="editable_input" contenteditable="true" data-placeholder="Enter text..." spellcheck="true"
+             data-medium-editor-element="true" role="textbox" aria-multiline="true"></div>
+        <div class="material_title" data-medium-editor-element="true">Description</div>
+        <div class="edit_description" id = "edit_description_id" name="editable_desc" contenteditable="true" data-placeholder="Enter description..." spellcheck="true"
+             data-medium-editor-element="true" role="textbox" aria-multiline="true"></div>
     </div>
-    <h2 id="lessonsTitle">Place for your lectures</h2>
 </div>
+<form method="post" id="data_send" action="addcourseprocess.jsp">
+    <input hidden="true" id="course_title_form" name="course_title" value="">
+    <input hidden="true" id="theme_form" name="theme" value="">
+    <input hidden="true" id="description_form" name="description" value="">
+</form>
+
+<div class="popupcont" id="popupcont">
+    <div class="popup" id="popup">
+        <div class="operstatus">Fill all fields!</div>
+        <button class="close" onclick="closePopUp()">OK</button>
+    </div>
+</div>
+
+<% if (request != null && request.getAttribute("textMsg") != null)
+{ %>
+<script type="text/javascript">
+    openPopUp();
+</script>
+<% }
+%>
 
 </body>
 </html>

@@ -16,12 +16,37 @@
     //System.out.println(request == null);
 
     //session.setAttribute("name", "student");
-    //String user = session.getAttribute("name").toString();
+    String user = session.getAttribute("name").toString();
 
     Class.forName("com.mysql.jdbc.Driver");
 
     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
     PreparedStatement pst = null;
+
+    try {
+        pst = conn.prepareStatement("SELECT lesson.id FROM lesson INNER JOIN test ON test.lesson = lesson.id WHERE test.id = ?");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, test_id);
+
+    ResultSet rs = pst.executeQuery();
+
+    String less_id = "";
+    if(rs.next()){
+        less_id = rs.getString("id");
+    }
+
+    try {
+        pst = conn.prepareStatement("INSERT INTO studentlesson(student, lesson, page, mark) VALUES(?, ?, null, null)");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+    pst.setString(1, user);
+    pst.setString(2, less_id);
+
+    pst.executeUpdate();
 
     try {
         pst = conn.prepareStatement("SELECT id, q_text, isOpen FROM question WHERE test = ?");
@@ -31,7 +56,7 @@
 
     pst.setString(1, test_id);
 
-    ResultSet rs = pst.executeQuery();
+    rs = pst.executeQuery();
     int n = 1;
     while(rs.next()) {
         request.setAttribute("quest_id" + n, rs.getString("id"));
