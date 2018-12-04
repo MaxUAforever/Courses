@@ -49,6 +49,21 @@
     }
 
     try {
+        pst = conn.prepareStatement("SELECT id FROM test WHERE lesson = ? AND isExam = 1");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, course_id);
+
+    rs = pst.executeQuery();
+
+    String exam = null;
+    if(rs.next()){
+        exam = rs.getString("id");
+    }
+
+    try {
         pst = conn.prepareStatement("SELECT id, less_name, description FROM lesson WHERE course=?");
     } catch (SQLException e) {
         out.println("SQL query creating error");
@@ -63,8 +78,9 @@
         request.setAttribute("less_name"+n, rs.getString("less_name"));
         request.setAttribute("less_description"+n, rs.getString("description"));
         PreparedStatement pst2 = null;
-        try {
-            pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ?");
+        if(!user.equals(request.getAttribute("course_lecturer")))
+        {try {
+            pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ? AND test.isExam = 0");
         } catch (SQLException e) {
         }
         String less_id =  request.getAttribute("less_id"+n).toString();
@@ -73,6 +89,18 @@
         request.setAttribute("less_test"+n, null);
         if(rs2.next()) {
             request.setAttribute("less_test"+n, rs2.getString("id"));
+        }}
+        else{
+            try {
+                pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ? AND test.isExam = 0");
+            } catch (SQLException e) {
+            }
+            String less_id =  request.getAttribute("less_id"+n).toString();
+            pst2.setString(1, less_id);
+            ResultSet rs2 = pst2.executeQuery();
+            if(rs2.next()) {
+                request.setAttribute("less_test"+n, rs2.getString("id"));
+            }
         }
         n++;
         %>
@@ -94,7 +122,7 @@
             rs = pst.executeQuery();
             request.setAttribute("current_test", null);
             if(rs.next()) {
-                request.setAttribute("current_test", rs.getString("current"));
+                request.setAttribute("current_test", rs.getInt("current"));
             }
     //response.sendRedirect("course.jsp");
 %>
@@ -123,7 +151,7 @@
         <%
             for (int i = 1; i < n; i++){
         %>
-        <h3><span>-</span><a class="lecture_link" href="#">Lecture <%=i%></a></h3>
+        <h3><span>•</span><a class="lecture_link" <%if (!user.equals(request.getAttribute("course_lecturer"))){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else{%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
         <!--<h3><span>-</span><a href="#">Lecture 2</a></h3>
         <h3><span>-</span><a href="#">Lecture 3</a></h3>-->
         <%
@@ -136,7 +164,7 @@
         <button type="button" name="button" onclick="pageRedirect('addlecture.jsp?course_id=<%=course_id%>')">Add lecture</button>
     </div>
     <div id="addExam">
-        <button type="button" name="button">Add exam</button>
+        <button type="button" <%if (exam == null){%>onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&edit=true')" <%} else{ %> onclick="pageRedirect('edittest.jsp?test_id=<%=exam%>')" <%}%> name="button"><%if(exam == null){%>Add exam<%}else{%>Edit exam<%}%></button>
     </div>
     <%}%>
 </div>
@@ -189,12 +217,27 @@
             <p id="lorem"><%=request.getAttribute("less_description"+i)%></p>
         </div>
         <div id="bottom">
-            <%if ((flag)&&(request.getAttribute("less_test"+i) != null)&&(!user.equals(request.getAttribute("course_lecturer"))))
-                {%><h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3><% flag = false;
-            }else if (user.equals(request.getAttribute("course_lecturer"))){%><h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3><%}%>
+            <%if (!user.equals(request.getAttribute("course_lecturer"))) {
+                if ((flag)&&(request.getAttribute("less_test"+i) != null))
+                {%>
+                    <h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3>
+                    <%flag = false;
+                }
+            }
+            else if (user.equals(request.getAttribute("course_lecturer")))
+            {
+                if ((request.getAttribute("less_test"+i) != null))
+                {%>
+                    <h3><a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a></h3>
+                <%}
+                else
+                {%>
+                    <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
+                <%}
+            }%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>
             <div id="buttOfLectureInfo">
-                <button type="button" name="button">Edit</button>
+                <button type="button" onclick="pageRedirect('editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>')" name="button">Edit</button>
                 <button type="button" onclick="openPopUpLess('<%=request.getAttribute("less_id"+i)%>')" name="button">Delete</button>
             </div>
             <%}%>

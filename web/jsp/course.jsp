@@ -78,7 +78,8 @@
         request.setAttribute("less_name"+n, rs.getString("less_name"));
         request.setAttribute("less_description"+n, rs.getString("description"));
         PreparedStatement pst2 = null;
-        try {
+        if(!user.equals(request.getAttribute("course_lecturer")))
+        {try {
             pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ? AND test.isExam = 0");
         } catch (SQLException e) {
         }
@@ -88,6 +89,18 @@
         request.setAttribute("less_test"+n, null);
         if(rs2.next()) {
             request.setAttribute("less_test"+n, rs2.getString("id"));
+        }}
+        else{
+            try {
+                pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ? AND test.isExam = 0");
+            } catch (SQLException e) {
+            }
+            String less_id =  request.getAttribute("less_id"+n).toString();
+            pst2.setString(1, less_id);
+            ResultSet rs2 = pst2.executeQuery();
+            if(rs2.next()) {
+                request.setAttribute("less_test"+n, rs2.getString("id"));
+            }
         }
         n++;
         %>
@@ -204,9 +217,24 @@
             <p id="lorem"><%=request.getAttribute("less_description"+i)%></p>
         </div>
         <div id="bottom">
-            <%if ((flag)&&(request.getAttribute("less_test"+i) != null)&&(!user.equals(request.getAttribute("course_lecturer"))))
-                {%><h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3><% flag = false;
-            }else if (user.equals(request.getAttribute("course_lecturer"))){%><h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3><%}%>
+            <%if (!user.equals(request.getAttribute("course_lecturer"))) {
+                if ((flag)&&(request.getAttribute("less_test"+i) != null))
+                {%>
+                    <h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3>
+                    <%flag = false;
+                }
+            }
+            else if (user.equals(request.getAttribute("course_lecturer")))
+            {
+                if ((request.getAttribute("less_test"+i) != null))
+                {%>
+                    <h3><a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a></h3>
+                <%}
+                else
+                {%>
+                    <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
+                <%}
+            }%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>
             <div id="buttOfLectureInfo">
                 <button type="button" onclick="pageRedirect('editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>')" name="button">Edit</button>
