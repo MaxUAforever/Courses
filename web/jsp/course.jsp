@@ -50,6 +50,21 @@
     }
 
     try {
+        pst = conn.prepareStatement("SELECT id FROM test WHERE lesson = ? AND isExam = 1");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, course_id);
+
+    rs = pst.executeQuery();
+
+    String exam = null;
+    if(rs.next()){
+        exam = rs.getString("id");
+    }
+
+    try {
         pst = conn.prepareStatement("SELECT id, less_name, description FROM lesson WHERE course=?");
     } catch (SQLException e) {
         out.println("SQL query creating error");
@@ -65,7 +80,7 @@
         request.setAttribute("less_description"+n, rs.getString("description"));
         PreparedStatement pst2 = null;
         try {
-            pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ?");
+            pst2 = conn.prepareStatement("SELECT test.id FROM (lesson INNER JOIN test ON lesson.id = test.lesson) WHERE lesson.id = ? AND test.isExam = 0");
         } catch (SQLException e) {
         }
         String less_id =  request.getAttribute("less_id"+n).toString();
@@ -137,7 +152,7 @@
         <button type="button" name="button" onclick="pageRedirect('addlecture.jsp?course_id=<%=course_id%>')">Add lecture</button>
     </div>
     <div id="addExam">
-        <button type="button" onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&edit=true')" name="button">Add exam</button>
+        <button type="button" <%if (exam == null){%>onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&edit=true')" <%} else{ %> onclick="pageRedirect('edittest.jsp?test_id=<%=exam%>')" <%}%> name="button"><%if(exam == null){%>Add exam<%}else{%>Edit exam<%}%></button>
     </div>
     <%}%>
 </div>

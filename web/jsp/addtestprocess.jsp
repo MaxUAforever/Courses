@@ -85,6 +85,7 @@ if (test_id != null) {
             quest_text = request.getParameter("quest"+i);
             points = request.getParameter("mark"+i);
             ans_count = request.getParameter("ans_cnt"+i);
+            System.out.println("Q:" + quest_text + " a: " + ans_count);
             if (ans_count == null){
                 try {
                     pst = conn.prepareStatement("INSERT INTO question(test, q_text, points, isOpen) VALUES(?, ?, ?, 1)");
