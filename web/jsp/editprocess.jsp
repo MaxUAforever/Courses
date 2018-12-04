@@ -44,7 +44,7 @@
     }
 
     try {
-        pst = conn.prepareStatement("REPLACE INTO `user` (login, hash_pass, role, user_name, description) VALUES(?, ?, ?, ?, ?)");
+        pst = conn.prepareStatement("INSERT INTO `user` (login, hash_pass, role, user_name, description) VALUES(?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE login = ?, hash_pass = ?, role = ?, user_name = ?, description = ?");
     } catch (SQLException e) {
         out.println("SQL querry qreating error");
     }
@@ -54,8 +54,13 @@
     pst.setString(3, role);
     pst.setString(4, uname);
     pst.setString(5, info);
+    pst.setString(6, email);
+    pst.setString(7, pass);
+    pst.setString(8, role);
+    pst.setString(9, uname);
+    pst.setString(10, info);
 
-    if (pst.executeUpdate() == 1){
+    if (pst.executeUpdate() > 0){
         request.setAttribute("textMsg", "User is edited!");
     %>
         <jsp:include page="admin.jsp" flush="true" />
