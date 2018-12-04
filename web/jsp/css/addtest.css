@@ -18,9 +18,13 @@
   text-align: center;
 }
 
+.testButtons {
+  padding: 5px;
+    text-align: center;
+}
+
 #button_main{
     padding: 5px;
-    float: left;
     border: 2px solid #2b4d66;
     color: #2b4d66;
     font-size: 15px;
