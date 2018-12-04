@@ -101,7 +101,6 @@
     <hr>
 
     <div class="leftcol">
-        <button class="button" id="button_main" onclick="save_test();">Save Test</button>
         <button class="button" id="button_main" onclick="add_close();">+ Add close question</button>
         <button class="button" id="button_main" onclick="add_open();">+ Add open question</button>
     </div>
@@ -123,7 +122,7 @@
 
             <% System.out.println("A: " + request.getAttribute("count"+i));
                 int count = Integer.parseInt(request.getAttribute("count"+i).toString());
-                %>
+            %>
             <input type="text" name="ans_cnt<%=i-1%>" id="ans_cnt" value="<%=count-1%>" style="display:none;"/>
             <%
                 for(int j = 1; j < count; j++){%>
@@ -148,6 +147,11 @@
         </div>
         <%}
         }%>
+        <br>
+        <button class="button" type="button" id="button_main" onclick="save_test();">Save Test</button>
+        <button class="button" type="button" id="button_main" onclick="openPopUpConf()">Cancel</button>
+
+
         <input type="text" name="test_id" id="test_id" value="<%=test_id%>" style="display:none;"/>
         <input type="text" name="course_id" id="course_id" value="<%=c_id%>" style="display:none;"/>
         <input type="text" name="lesson_id" id="lesson_id" value="<%=l_id%>" style="display:none;"/>
@@ -165,6 +169,16 @@
         }
         }%>
     </form>
+
+    <div class="popupconfcont" id="popupconfcont">
+        <div class="popupconf" id="popupconf">
+            <div class="operstatus">All changes will be lost. Continue?</div>
+            <div class="popUpButtons">
+                <button id="confirm" onclick="statusPressed('confirm');closePopUpConf();pageRedirect('course.jsp?course_id=<%=c_id%>')">OK</button>
+                <button id="cancel" onclick="statusPressed('close');closePopUpConf()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
 <br>
 
