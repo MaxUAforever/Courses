@@ -17,12 +17,6 @@ body {
 	color: #fafafa;
 }
 
-
-.header a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
 .circle {
 	position: relative;
 	top: 5px;
@@ -88,10 +82,13 @@ img {
 
 .courses_info {
 	/*border-radius: 10px;*/
-	position: absolute;
 	width: 800px;
-  border: 3px solid #2b4d68;
+    border: 3px solid #2b4d68;
 
+}
+
+.descript{
+    margin-top: 20px;
 }
 
 .hdr {
@@ -143,7 +140,6 @@ img {
   -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
 }
 
-/*
 .contact {
   float: left;
   margin-left: 50px;
@@ -158,14 +154,12 @@ img {
 .footcont {
   overflow: hidden;
 }
-*/
 
 .course {
   width: 700px;
   font-size: 18px;
-  display: flex;
-  margin: 0 auto;
-  height: 40px;
+  margin: 20px;
+
 
 }
 

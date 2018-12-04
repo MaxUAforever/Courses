@@ -4,7 +4,6 @@
 <head>
     <title>Lecturer page</title>
     <link rel="stylesheet" type="text/css" href="css/lecturer.css">
-    <script src="js/course.js"></script>
 </head>
 <body>
 <%
@@ -81,72 +80,48 @@
     }
 %>
 <jsp:include page="header/header.jsp"/>
-<!--<header>
-    <div class = "logo">
-        <img src="header/logo.png" alt="logo">
-    </div>
-    <headercount>
-        <div class="item"><a href="allcourses.jsp">Courses</a></div>
-        <div class="item"><a href="">About</a></div>
-        <div class="item">
-            <form action="allcourses.jsp" method="post" class="searchcontainer">
-                <p><input type="search" name="q" placeholder="Search courses">
-                    <input type="image" id = "buttonSearch" src="header/search.png" alt="Search">
-                </p>
-            </form>
-        </div>
-    </headercount>
-    <div class="reg">
-        <div id="adminimg"></div>
-        <a href="lecturer.jsp" class="header_name"><%/*out.print(session.getAttribute("name"));*/%></a>
-        <br>
-        <a href="login.jsp">Log Out</a>
-    </div>
-</header>-->
 
-<div class="title"><span><h3>Lecturer Page</h3></span></div>
-
+<div class="title">Lecturer Page</div>
+<div class="content">
 <div class="lecturer">
-    <center>
-        <div class = "circle">
-            <img src="img/lecturer/customer-login.png" alt="Users photo">
+    <h3><p align="center"><%=request.getAttribute("lecturer_name")%></p></h3>
+    <h4><p align="center">lecturer</p></h4>
+    <div id="personal_info">
+        <div class="lecturer_info" >
+
+                Specializations:
+                <%
+                    for (int i = 1; i < t; i++){
+                %>
+                <p align="center">- <%=request.getAttribute("theme"+i)%></p>
+                <%
+                    }
+                %>
+
         </div>
-    </center>
-    <div class="info">
-        <h3><p align="center"><%=request.getAttribute("lecturer_name")%></p></h3>
-        <h4><p align="center">Lecturer</p></h4>
-        <span><h4><p align="center">Specializations:</p></h4></span>
-        <%
-            for (int i = 1; i < t; i++){
-        %>
-        <h5><p align="center">- <%=request.getAttribute("theme"+i)%></p></h5>
-        <%
-            }
-        %>
-        <h5><p align="center"><a href="list_of_students.jsp">Subscribed students</a></p></h5>
+        <div class="lecturer_info" >
+            <details>
+                <summary>Personal information</summary>
+                <p id="persinfo"><%=request.getAttribute("lecturer_description")%></p>
+            </details>
+        </div>
     </div>
 </div>
 <div class = "course_column">
-    <div class="personal_info">
-        <h3><p align="center">Personal information</p></h3>
-        <div class="lecturer_info">
-            <p><%=request.getAttribute("lecturer_description")%></p>
-        </div>
-    </div>
-
     <div class="courses_info">
-        <p> <h5><p align="right"><a class="addcourselink" href="addcourse.jsp">+ Add</a></p></h5> <h3><p align="center">Courses:</p></h3></p>
+        <div class="hdr">My courses:</div><br/>
         <%
             for (int i = 1; i < n; i++){
         %>
         <div class="course">
-            <a class="courselink" href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"> <h4><p align="center"><%=request.getAttribute("course_name"+i)%>: <%=request.getAttribute("course_theme"+i)%></p></h4></a>
-            <p><%=request.getAttribute("course_description"+i)%></p>
+            <a class="courselink" href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"><h4><p align="center"><%=request.getAttribute("course_name"+i)%>: <%=request.getAttribute("course_theme"+i)%></p></h4></a>
+            <div class = "descript"> <p><%=request.getAttribute("course_description"+i)%></p></div>
         </div>
         <%
             }
         %>
     </div>
+</div>
 </div>
 <footer class="foot">
     <div class="footcont">
@@ -159,14 +134,6 @@
         </div>
     </div>
 </footer>
-
-<% if (request != null && request.getAttribute("textMsg") != null){ %>
-<script type="text/javascript">
-    openPopUp();
-</script>
-<% }
-
-%>
 
 </body>
 </html>
