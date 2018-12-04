@@ -207,3 +207,62 @@
     background-color: #78c4ff;
     color: white;
 }
+
+.popupconfcont{
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    background-color: rgba(1, 1, 1, 0.725);
+    z-index: 100;
+    overflow: auto;
+}
+
+.popupconf{
+    display: none;
+    width: 300px;
+    height: 150px;
+    margin: 200px auto;
+    background: #fff;
+    z-index: 200;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+#confirm{
+    padding: 5px;
+    float: left;
+    border: 2px solid #2b4d66;
+    color: #2b4d66;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15%;
+    width: 140px;
+    height: 40px;
+    text-align: center;
+}
+
+#cancel{
+    padding: 5px;
+    float: right;
+    border: 2px solid #2b4d66;
+    color: #2b4d66;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15%;
+    width: 140px;
+    height: 40px;
+    text-align: center;
+}

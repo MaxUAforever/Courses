@@ -19,9 +19,30 @@
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
         PreparedStatement pst = null;
 
-        String course_id = request.getParameter("course_id");
+        String test_id = null;
+        if (request != null){ test_id = request.getParameter("test_id");}
+        String course_id =  request.getParameter("course_id");
         String lesson_id = request.getParameter("lesson_id");
-        System.out.println("l_id: " + lesson_id);
+        int isExam;
+
+        if ((request.getParameter("lesson_id") == null)||(request.getParameter("lesson_id").equals("null"))){
+            isExam = 1;
+            lesson_id=course_id;
+        }
+        else{
+            isExam = 0;
+        }
+if (test_id != null) {
+    try {
+        pst = conn.prepareStatement("DELETE FROM test WHERE id = ?");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+    pst.setString(1, test_id);
+
+    pst.executeUpdate();
+}
+
         String quest_count = request.getParameter("quest_count");
         String quest_text;//"quest" + q_num
         String ans_count; //"ans_cnt" + q_num
@@ -37,12 +58,14 @@
         System.out.println(evaluation);
 
         try {
-            pst = conn.prepareStatement("INSERT INTO test(lesson, evaluation) VALUES(?, ?)");
+            pst = conn.prepareStatement("INSERT INTO test(lesson, evaluation, isExam) VALUES(?, ?, ?)");
         } catch (SQLException e) {
             out.println("SQL query creating error");
         }
+        System.out.println("lesson: " + lesson_id);
         pst.setString(1, lesson_id);
         pst.setInt(2, evaluation);
+        pst.setInt(3, isExam);
 
         pst.executeUpdate();
 
@@ -53,18 +76,19 @@
         }
 
         ResultSet rs = pst.executeQuery();
-        String test_id = "";
+        test_id = "";
         if (rs.next()) {
             test_id = rs.getString("test_id");
         }
-
+        System.out.println("quest_count: " + Integer.parseInt(quest_count));
         for (int i = 0; i < Integer.parseInt(quest_count); i++){
             quest_text = request.getParameter("quest"+i);
             points = request.getParameter("mark"+i);
             ans_count = request.getParameter("ans_cnt"+i);
+            System.out.println("Q:" + quest_text + " a: " + ans_count);
             if (ans_count == null){
                 try {
-                    pst = conn.prepareStatement("INSERT INTO question(test, q_text, points, isExam, isOpen) VALUES(?, ?, ?, 0, 1)");
+                    pst = conn.prepareStatement("INSERT INTO question(test, q_text, points, isOpen) VALUES(?, ?, ?, 1)");
                 } catch (SQLException e) {
                     out.println("SQL query creating error");
                 }
@@ -76,7 +100,7 @@
             }
             else{
                 try {
-                    pst = conn.prepareStatement("INSERT INTO question(test, q_text, points, isExam, isOpen) VALUES(?, ?, ?, 0, 0)");
+                    pst = conn.prepareStatement("INSERT INTO question(test, q_text, points, isOpen) VALUES(?, ?, ?, 0)");
                 } catch (SQLException e) {
                     out.println("SQL query creating error");
                 }
@@ -116,7 +140,18 @@
             }
 
         }
-        request.setAttribute("textMsg", "Test added!");
+        if((isExam == 0)&&(request.getParameter("test_id") == null)){
+            request.setAttribute("textMsg", "Test added!");
+        }
+        else if((isExam == 1)&&(request.getParameter("test_id") == null)){
+            request.setAttribute("textMsg", "Exam added!");
+        }
+        else if((isExam == 0)&&(request.getParameter("test_id") != null)){
+            request.setAttribute("textMsg", "Test edited!");
+        }
+        else{
+            request.setAttribute("textMsg", "Exam edited!");
+        }
     %>
     <jsp:include page="course.jsp?course_id=<%=course_id%>" flush="true" />
 </body>
