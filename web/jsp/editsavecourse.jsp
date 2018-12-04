@@ -30,14 +30,7 @@
             System.out.println(course_id + " " + course_name + " " + course_theme + " " + course_description);
 
         try {
-            pst = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
-        } catch (SQLException e) {
-            out.println("SQL query creating error");
-        }
-        pst.executeQuery();
-
-        try {
-            pst = conn.prepareStatement("REPLACE INTO course (id, lecturer, course_name, theme, description) VALUES(?,?,?,?,?)");
+            pst = conn.prepareStatement("INSERT INTO course (id, lecturer, course_name, theme, description) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE lecturer = ?, course_name = ?, theme = ?, description = ?");
         } catch (SQLException e) {
             out.println("SQL query creating error");
         }
@@ -46,18 +39,17 @@
         pst.setString(3, course_name);
         pst.setString(4, course_theme);
         pst.setString(5, course_description);
+        pst.setString(6, course_lecturer);
+        pst.setString(7, course_name);
+        pst.setString(8, course_theme);
+        pst.setString(9, course_description);
 
         if (pst.executeUpdate() > 0) {
             request.setAttribute("textMsg", "Course edited!");
         }
         else
             request.setAttribute("textMsg", "Course edit failed!");
-            try {
-                pst = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1");
-            } catch (SQLException e) {
-                out.println("SQL query creating error");
 
-            }
         %>
         <jsp:include page="course.jsp?course_id=<%=course_id%>" flush="true" />
         <%
