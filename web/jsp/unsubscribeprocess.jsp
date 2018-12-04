@@ -11,7 +11,7 @@
     String course_id = request.getParameter("course_id");
 
     try {
-        pst = conn.prepareStatement("INSERT INTO courses.subscribe (student, course) VALUES (?, ?)");
+        pst = conn.prepareStatement("DELETE FROM subscribe WHERE student = ? AND course = ?");
     } catch (SQLException e) {
         out.println("SQL query qreating error");
     }
@@ -22,5 +22,4 @@
 
     response.sendRedirect("course.jsp?course_id=" + course_id);
 %>
-
 

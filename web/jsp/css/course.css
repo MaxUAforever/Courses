@@ -405,3 +405,20 @@ button:hover {
   background-color: #78c4ff;
   color: white;
 }
+
+#subscribeCourse {
+  margin: 0 auto;
+  display:inline;
+  color: white;
+  height: 35px;
+  width: 120px;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -webkit-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+}

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
-    //request.setAttribute("course_id", "4");
+    //session.setAttribute("name", "student");
     String course_id = request.getParameter("course_id");
 
     String edit = "false";
@@ -117,14 +117,28 @@
         out.println("SQL query creating error");
     }
 
-            pst.setString(1, user);
+    pst.setString(1, user);
 
-            rs = pst.executeQuery();
-            request.setAttribute("current_test", null);
-            if(rs.next()) {
-                request.setAttribute("current_test", rs.getInt("current"));
-            }
-    //response.sendRedirect("course.jsp");
+    rs = pst.executeQuery();
+    request.setAttribute("current_test", null);
+    if(rs.next()) {
+        request.setAttribute("current_test", rs.getInt("current"));
+    }
+
+    try {
+        pst = conn.prepareStatement("SELECT id FROM subscribe WHERE student = ? AND course = ?");
+        } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, user);
+    pst.setString(2, course_id);
+
+    rs = pst.executeQuery();
+    boolean subscribe = false;
+    if(rs.next()){
+        subscribe = true;
+    }
 %>
 <div id="coursetitle">
     <h1 id="title">Course information</h1>
@@ -151,7 +165,7 @@
         <%
             for (int i = 1; i < n; i++){
         %>
-        <h3><span>•</span><a class="lecture_link" <%if (!user.equals(request.getAttribute("course_lecturer"))){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else{%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
+        <h3><span>•</span><a class="lecture_link" <%if ((!user.equals(request.getAttribute("course_lecturer")))&&(subscribe)){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else if (user.equals(request.getAttribute("course_lecturer"))){%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
         <!--<h3><span>-</span><a href="#">Lecture 2</a></h3>
         <h3><span>-</span><a href="#">Lecture 3</a></h3>-->
         <%
@@ -166,7 +180,12 @@
     <div id="addExam">
         <button type="button" <%if (exam == null){%>onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&edit=true')" <%} else{ %> onclick="pageRedirect('edittest.jsp?test_id=<%=exam%>')" <%}%> name="button"><%if(exam == null){%>Add exam<%}else{%>Edit exam<%}%></button>
     </div>
-    <%}%>
+    <%}
+    else{
+        %>
+    <button id="subscribeCourse" <%if (subscribe){ %> onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=course_id%>')" <%} else{ %> onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=course_id%>')" <%}%> type="button"  name="buttonSub"><%if(!subscribe){%>Subscribe<%} else{%>Unsubscribe<%}%></button>
+    <%
+    }%>
 </div>
 <!-- End navigate block -->
 <!-- main part -->
@@ -198,6 +217,7 @@
     <h2 id="lessonsTitle">Lessons</h2>
 
     <%
+    if(subscribe){
         boolean flag = false;
         if (request.getAttribute("current_test") == null)
             flag = true;
@@ -247,6 +267,7 @@
         if ((request.getAttribute("current_test") != null)&&(request.getAttribute("current_test").toString().equals(request.getAttribute("less_id"+i).toString())))
         flag = true;
         }
+    }
     %>
 
     <!--<div id="lectureInfo">

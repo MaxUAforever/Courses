@@ -35,6 +35,7 @@
 <%
     //request.setAttribute("course_id", "4");
     //String course_id = "1";
+
     String theme = null;
     if (request.getParameter("theme") != null)
         theme = request.getParameter("theme");
@@ -99,7 +100,6 @@
             request.setAttribute("theme"+t, rs.getString("theme"));
             t++;}
     }
-
 %>
 
 <div class="content">
@@ -144,7 +144,6 @@
                 </div>
             </div>
             <div class = "pageButt">
-                <button id="subscribeCourse" onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')" type="button"  name="buttonSub">Subscribe</button>
                 <button id="showMoreButt"  onclick="pageRedirect('course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')" type="button"  name="button">Show More</button>
             </div>
         </div>
