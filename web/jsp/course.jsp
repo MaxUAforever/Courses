@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -152,7 +152,7 @@
         <%
             for (int i = 1; i < n; i++){
         %>
-        <h3><span>•</span><a class="lecture_link" <%if ((!user.equals(request.getAttribute("course_lecturer")))&&(subscribe)){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else{%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
+        <h3><span>•</span><a class="lecture_link" <%if ((!user.equals(request.getAttribute("course_lecturer")))&&(subscribe)){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else if (user.equals(request.getAttribute("course_lecturer"))){%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
         <!--<h3><span>-</span><a href="#">Lecture 2</a></h3>
         <h3><span>-</span><a href="#">Lecture 3</a></h3>-->
         <%

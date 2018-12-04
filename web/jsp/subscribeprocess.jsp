@@ -19,7 +19,8 @@
     pst.setString(2, course_id);
 
     pst.executeUpdate();
+
+    response.sendRedirect("course.jsp?course_id=" + course_id);
 %>
 
-<jsp:include page="allcourses.jsp" flush="true" />
 
