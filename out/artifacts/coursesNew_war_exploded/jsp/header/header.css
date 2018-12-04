@@ -41,20 +41,21 @@ header headercount {
   margin-left: 85%;
   margin-top: 1%;
 }
-form {
+
+.header_form {
   width: 250px;
   height: 20px;
   border-radius: 5px;
 }
 
-form p{
+.header_form p{
   border: black 5px;
   height: 20px;
   border-radius: 5px;
   width: 250px;
 }
 
-form p input {
+.header_form p input {
   position: absolute;
   top:30px;
   width: 230px;

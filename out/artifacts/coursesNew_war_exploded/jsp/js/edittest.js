@@ -16,13 +16,17 @@ function save_test(){
     }
 
     var quest_cnt = document.getElementById("quest_count_id");
-    quest_cnt.value = q_num;
+    var quest_cnt_old = document.getElementById("q_cnt").value;
+    quest_cnt.value = Number(q_num) + Number(quest_cnt_old);
 
     document.getElementById("rightcol_id").submit();
-
     /*var heh = document.getElementById("heh");
     heh.innerHTML = elem_from.length.toString();*/
 };
+
+function set_num(){
+    q_num = document.getElementById("q_cnt").value;
+}
 
 /*function fill_area(elem){
 
@@ -31,7 +35,7 @@ function save_test(){
 }*/
 
 function add_open(){
-    var p = document.getElementById("questContent");
+    var p = document.getElementById("rightcol_id");
     var new_open = document.createElement("div");
     new_open.setAttribute("id", "edit_open_id");
     new_open.setAttribute("class","edit_open");
@@ -73,7 +77,7 @@ function add_open(){
 };
 
 function add_close() {
-    var p = document.getElementById("questContent");
+    var p = document.getElementById("rightcol_id");
     var new_test = document.createElement("div");
     new_test.name = "test" + q_num;
     new_test.setAttribute("class", "edit_test");
@@ -225,10 +229,36 @@ function add_answers(elem){
             if (flag == false)
                 par.children[i+4].remove();
             else
-               flag = false;
+                flag = false;
         }
     }
 
     par.update();
 };
 
+function pageRedirect(ref){
+    window.location.href = ref;
+};
+
+function closePopUpConf(){
+    var backPopUp = document.getElementById("popupconfcont");
+    var popUp = document.getElementById("popupconf");
+    backPopUp.style.display = "none";
+    popUp.style.display = "none";
+};
+
+function openPopUpConf(){
+    var backPopUp = document.getElementById("popupconfcont");
+    var popUp = document.getElementById("popupconf");
+    backPopUp.style.display = "inline";
+    popUp.style.display = "inline";
+};
+
+function statusPressed(button){
+    if (button == "confirm"){
+        return true;
+    }
+    else{
+        return false;
+    }
+};

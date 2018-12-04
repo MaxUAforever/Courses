@@ -1,0 +1,137 @@
+h3 {
+  text-align: center;
+}
+
+.testQuest {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.questP {
+  text-indent: 25px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.testQuestAns {
+  text-align: center;
+}
+
+.openQuest {
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+.openQuestAns {
+  text-align: center;
+}
+
+.openQuestAns textarea {
+  overflow-y: scroll;
+  resize: none;
+}
+
+.openQuestMark {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: center;
+  margin: 15px;
+}
+
+.openQuestMark input {
+  margin-left: 15px;
+}
+
+.testQuestForm > button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 35px;
+  width: 200px;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -webkit-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+}
+
+
+
+
+.popupconfcont{
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 16px;
+  background-color: rgba(1, 1, 1, 0.725);
+  z-index: 100;
+  overflow: auto;
+}
+
+.popupconf{
+  display: none;
+  width: 300px;
+  height: 150px;
+  margin: 200px auto;
+  background: #fff;
+  z-index: 200;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.operstatus {
+  text-align: center;
+  font-size: 26px;
+  font-family: sans-serif;
+}
+
+#confirm{
+  float: left;
+  height: 35px;
+  width: 140px;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -webkit-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  margin-top: 20%;
+}
+
+#cancel{
+  float: right;
+  height: 35px;
+  width: 140px;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -webkit-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  margin-top: 20%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
