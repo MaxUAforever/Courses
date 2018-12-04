@@ -13,7 +13,7 @@
             <div class="item"><a href="allcourses.jsp">Courses</a></div>
             <div class="item"><a href="">About</a></div>
             <div class="item">
-                <form class="header_form" action="allcourses.jsp" method="post" class="searchcontainer">
+                <form action="allcourses.jsp" method="post" class="searchcontainer">
                     <p><input type="search" name="q" placeholder="Search courses">
                         <input type="image" id = "buttonSearch" src="header/search.png" alt="Search">
                     </p>

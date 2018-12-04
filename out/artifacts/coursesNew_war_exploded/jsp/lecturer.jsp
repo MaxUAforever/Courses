@@ -4,7 +4,6 @@
 <head>
     <title>Lecturer page</title>
     <link rel="stylesheet" type="text/css" href="css/lecturer.css">
-    <script src="js/course.js"></script>
 </head>
 <body>
 <%
@@ -123,7 +122,6 @@
         <%
             }
         %>
-        <h5><p align="center"><a href="list_of_students.jsp">Subscribed students</a></p></h5>
     </div>
 </div>
 <div class = "course_column">
@@ -135,7 +133,7 @@
     </div>
 
     <div class="courses_info">
-        <p> <h5><p align="right"><a class="addcourselink" href="addcourse.jsp">+ Add</a></p></h5> <h3><p align="center">Courses:</p></h3></p>
+        <p><h3><p align="center">Courses:</p></h3> </p>
         <%
             for (int i = 1; i < n; i++){
         %>
@@ -159,14 +157,6 @@
         </div>
     </div>
 </footer>
-
-<% if (request != null && request.getAttribute("textMsg") != null){ %>
-<script type="text/javascript">
-    openPopUp();
-</script>
-<% }
-
-%>
 
 </body>
 </html>

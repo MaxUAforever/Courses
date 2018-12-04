@@ -3,9 +3,9 @@ function showAddForm(){
     var currentState = addingForm.style.display;
     if (currentState == "none" || currentState == ""){
         var delForm = document.getElementById("deleteuserform");
-        var editForm_3 = document.getElementById("searchEdit");
+        var editForm = document.getElementById("editeuserform");
         delForm.style.display = "none";
-        editForm_3.style.display = "none";
+        editForm.style.display = "none";
         addingForm.style.display = "inline";
     }
     else{
@@ -18,11 +18,9 @@ function showDelForm(){
     var currentState = delForm.style.display;
     if (currentState == "none" || currentState == ""){
         var addingForm = document.getElementById("createuserform");
-        var editForm_3 = document.getElementById("searchEdit");
-
+        var editForm = document.getElementById("editeuserform");
         addingForm.style.display = "none";
-
-        editForm_3.style.display = "none";
+        editForm.style.display = "none";
         delForm.style.display = "inline";
     }
     else{
@@ -31,21 +29,19 @@ function showDelForm(){
 }
 
 function showEditForm(){
-    var editForm_3 = document.getElementById("searchEdit");
-    var currentState = editForm_3.style.display;
+    var editForm = document.getElementById("editeuserform");
+    var currentState = editForm.style.display;
     if (currentState == "none" || currentState == ""){
         var addingForm = document.getElementById("createuserform");
         var delForm = document.getElementById("deleteuserform");
         addingForm.style.display = "none";
         delForm.style.display = "none";
-
-        editForm_3.style.display = "inline";
+        editForm.style.display = "inline";
     }
     else{
-        editForm_3.style.display = "none";
+        editForm.style.display = "none";
     }
 }
-
 
 function closePopUp(){
     var backPopUp = document.getElementById("popupcont");
@@ -60,3 +56,4 @@ function openPopUp(){
     backPopUp.style.display = "inline";
     popUp.style.display = "inline";
 } ;
+
