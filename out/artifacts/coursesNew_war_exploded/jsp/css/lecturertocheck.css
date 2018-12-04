@@ -1,0 +1,38 @@
+.title {
+  margin-top: 5px;
+  height:22px;
+  width: auto;
+  background: linear-gradient(to right, #ffffff, #2b4d68, #ffffff);
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.infocol{
+    font-size: 15px;
+    border: 3px solid #2b4d68;
+    width: 600px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-family: Helvetica;
+}
+
+.testinfo{
+  padding-top: 10px;
+  display: flex;
+  width: 600px;
+  height: 20px;
+}
+
+#testText{
+  display:inline;
+}
+
+#butCheck{
+  display:inline;
+  position: absolute;
+  margin-left: 40%;
+
+}

@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
-
-<!DOCTYPE html>
 <html>
 <head>
     <title>Header part</title>
@@ -12,26 +10,54 @@
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
+    String l_id = request.getParameter("lecture_id");
     String c_id = request.getParameter("course_id");
 
-    Class.forName("com.mysql.jdbc.Driver");
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+    } catch (ClassNotFoundException e) {
+        out.println("Class exception");
+    }
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = null;
+    try {
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    } catch (SQLException e) {
+        out.println("Connect error");
+    }
     PreparedStatement pst = null;
 
     try {
-        pst = conn.prepareStatement("SELECT course_name FROM course WHERE id=?");
+        pst = conn.prepareStatement("SELECT lesson.id, course.course_name, lesson.less_name, lesson.description, lesson.material FROM courses.course, courses.lesson WHERE (lesson.course = course.id) AND (lesson.id = ?)");
     } catch (SQLException e) {
         out.println("SQL query creating error");
     }
 
-    pst.setString(1, c_id);
+    pst.setString(1, request.getParameter("lecture_id").toString());
 
     ResultSet rs = pst.executeQuery();
-    if(rs.next()) {
+
+    rs.next();
+
+    request.setAttribute("lecture_id", rs.getString("id"));
+    if (rs.getString("course_name") != null)
         request.setAttribute("course_name", rs.getString("course_name"));
-    }
+    else
+        request.setAttribute("course_name", "");
+    if (rs.getString("less_name") != null)
+        request.setAttribute("lesson_name", rs.getString("less_name"));
+    else
+        request.setAttribute("lesson_name", "");
+    if (rs.getString("description") != null)
+        request.setAttribute("lesson_description", rs.getString("description"));
+    else
+        request.setAttribute("lesson_description", "");
+    if (rs.getString("material") != null)
+        request.setAttribute("lesson_material", rs.getString("material"));
+    else
+        request.setAttribute("lesson_material", "");
 %>
+
 <div class="main_layer">
     <div class="title" id="course_title"><%=request.getAttribute("course_name")%></div>
     <hr>
@@ -43,19 +69,19 @@
     </div>
     <div class = "rightcol" id="rightcol_id">
         <div class="edit_input_title" id="edit_input_title_id" contenteditable="true" data-placeholder="Enter lecture title..." spellcheck="true"
-             data-medium-editor-element="true" role="textbox"></div>
+             data-medium-editor-element="true" role="textbox"><%=request.getAttribute("lesson_name")%></div>
         <div class="edit_description" id = "edit_description_id" name="editable_desc" contenteditable="true" data-placeholder="Enter description..." spellcheck="true"
-             data-medium-editor-element="true" role="textbox" aria-multiline="true"></div>
+             data-medium-editor-element="true" role="textbox" aria-multiline="true"><%=request.getAttribute("lesson_description")%></div>
         <div class="material_title" data-medium-editor-element="true">Lecture material</div>
         <div class="edit_input_text" id = "edit_input_text" name="editable_input" contenteditable="true" data-placeholder="Enter text..." spellcheck="true"
-             data-medium-editor-element="true" role="textbox" aria-multiline="true"></div>
+             data-medium-editor-element="true" role="textbox" aria-multiline="true"><%=request.getAttribute("lesson_material")%></div>
         <!--<div class="input_photo" id="input_photo_id">
             <input type='file' id="upload" onchange="readURL(this);"/>
             <img src="#" id="upload-img" alt="image" />
         </div>-->
     </div>
 </div>
-<form method="post" id="data_send" action="addlectureconfirm.jsp?course_id=<%=c_id%>">
+<form method="post" id="data_send" action="editlectureconfirm.jsp?course_id=<%=c_id%>&lecture_id=<%=l_id%>">
     <input type="hidden" id="course_title_form" name="course_title" value="">
     <input type="hidden" id="lecture_title_form" name="lecture_title" value="">
     <input type="hidden" id="description_form" name="description" value="">
@@ -79,6 +105,3 @@
 
 </body>
 </html>
-
-
-
