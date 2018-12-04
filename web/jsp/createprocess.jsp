@@ -3,12 +3,15 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+
     String email = request.getParameter("email");
     String password = request.getParameter("password");
     String password_cp = request.getParameter("password_cp");
     String uname = request.getParameter("uname");
     String info = request.getParameter("info");
     String role = request.getParameter("role");
+
+    System.out.println(role);
 
     Class.forName("com.mysql.jdbc.Driver");
 
@@ -27,16 +30,15 @@
     if(rs.next()){
         if (rs.getInt(1) > 0) {
             out.println("Email is already used.");
-            TimeUnit.SECONDS.sleep(3);
             response.sendRedirect("admin.jsp");
         }
     }
-    if (!password.equals(password_cp))
+    else if (!password.equals(password_cp))
     {
         out.println("Passwords are different.");
-        TimeUnit.SECONDS.sleep(3);
         response.sendRedirect("admin.jsp");
     }
+
 
     try {
         pst = conn.prepareStatement("INSERT INTO `user` (login, hash_pass, role, user_name, description) VALUES(?, ?, ?, ?, ?)");

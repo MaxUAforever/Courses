@@ -29,14 +29,15 @@
             <form action="createprocess.jsp" method="post" class="createuser" id="createuserform">
                 <div id="createnewuser">Create new user</div>
                 <div class="leftcolform">
+                    <div class="textonform1">Name<input name="uname" type="text"  value="" required>*</div>
                     <div class="textonform1">E-email<input name="email" type="text"  value="" required>*</div>
                     <div class="textonform1">Password<input name="password" type="text" value="" required>*</div>
-                    <div class="textonform1">Confirm password<input name="password2" type="text" value="" required>*</div>
-                    <div class="textonform2">Personal info<textarea id="info" name="name" rows="4" cols="33"></textarea></div>
+                    <div class="textonform1">Confirm password<input name="password_cp" type="text" value="" required>*</div>
+                    <div class="textonform2">Personal info<textarea id="info" name="info" rows="4" cols="33"></textarea></div>
                     <div class="textonform1">Role*
                         <div class="radioGroup">
                             <div class="rbutt">
-                                <p><input name="radGroup" type="radio" id="student"
+                                <p><input type="radio" id="student"
                                           name="role" value="student">student</p>
                             </div>
                             <div class="rbutt">
@@ -124,7 +125,7 @@
             <form action="editprocess.jsp" method="post" class="editeuser" id="editeuserform">
                     <div class="textonform1">Login*<input type="text" name="email" id="email" value="<%=email%>"></div>
                     <div class="textonform1">Name*<input type="text" name="uname" id="uname" value="<%=user_name%>"></div>
-                    <div class="textonform2">Personal info<textarea id="info" name="name" rows="4" cols="33"><%=description%></textarea></div>
+                    <div class="textonform2">Personal info<textarea id="info" name="info" rows="4" cols="33"><%=description%></textarea></div>
                     <div class="textonform1">Role
                         <div class="radioGroup">
 

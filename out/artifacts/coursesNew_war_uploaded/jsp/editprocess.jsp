@@ -4,8 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String email = request.getParameter("email");
-    String password = request.getParameter("password");
-    String password_cp = request.getParameter("password_cp");
     String uname = request.getParameter("uname");
     String info = request.getParameter("info");
     String role = request.getParameter("role");
@@ -33,24 +31,38 @@
     }
 
     try {
-        pst = conn.prepareStatement("REPLACE INTO `user` (login, role, user_name, description) VALUES(?, ?, ?, ?)");
+        pst = conn.prepareStatement("SELECT hash_pass FROM user WHERE login=?");
+    } catch (SQLException e) {
+        out.println("SQL querry qreating error");
+    }
+
+    String pass = "";
+    pst.setString(1, email);
+    rs = pst.executeQuery();
+    if(rs.next()){
+        pass = rs.getString("hash_pass");
+    }
+
+    try {
+        pst = conn.prepareStatement("REPLACE INTO `user` (login, hash_pass, role, user_name, description) VALUES(?, ?, ?, ?, ?)");
     } catch (SQLException e) {
         out.println("SQL querry qreating error");
     }
 
     pst.setString(1, email);
-    pst.setString(2, role);
-    pst.setString(3, uname);
-    pst.setString(4, info);
+    pst.setString(2, pass);
+    pst.setString(3, role);
+    pst.setString(4, uname);
+    pst.setString(5, info);
 
     if (pst.executeUpdate() == 1){
-        request.setAttribute("textMsg", "User is successfully edited!");
+        request.setAttribute("textMsg", "User is edited!");
     %>
         <jsp:include page="admin.jsp" flush="true" />
     <%
     }
     else{
-        request.setAttribute("textMsg", "Invalid user credentials!");
+        request.setAttribute("textMsg", "Wrong user data!");
     %>
         <jsp:include page="admin.jsp" flush="true" />
     <%
