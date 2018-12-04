@@ -139,7 +139,7 @@
         <%
             for (int i = 1; i < n; i++){
         %>
-        <h3><span>-</span><a class="lecture_link" href="#">Lecture <%=i%></a></h3>
+        <h3><span>•</span><a class="lecture_link" <%if (!user.equals(request.getAttribute("course_lecturer"))){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else{%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
         <!--<h3><span>-</span><a href="#">Lecture 2</a></h3>
         <h3><span>-</span><a href="#">Lecture 3</a></h3>-->
         <%
