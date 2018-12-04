@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
-    //session.setAttribute("name", "student");
+    session.setAttribute("name", "student");
     String course_id = request.getParameter("course_id");
 
     String edit = "false";
@@ -217,7 +217,7 @@
     <h2 id="lessonsTitle">Lessons</h2>
 
     <%
-    if(subscribe){
+    if((subscribe)||(user.equals(request.getAttribute("course_lecturer")))){
         boolean flag = false;
         if (request.getAttribute("current_test") == null)
             flag = true;
