@@ -66,107 +66,54 @@
             request.setAttribute("course_mark"+n, "");
         n++;
     }
-
-    //try {
-    //    pst = conn.prepareStatement("SELECT DISTINCT theme FROM course WHERE lecturer = ?");
-    //} catch (SQLException e) {
-    //    out.println("SQL query creating error");
-    //}
-
-    //pst.setString(1, lecturer);
-
-    //rs = pst.executeQuery();
-    //int t = 1;
-    //while(rs.next()){
-    //  if ((rs.getString("theme") != null) && (!rs.getString("theme").equals(""))){
-    //    request.setAttribute("theme"+t, rs.getString("theme"));
-    //    t++;}
-    //}
 %>
 
-<header>
-    <div class="headercont">
-        <div class="logo">
-            COURSE
-        </div>
-        <div class="item"><a href="">Home</a></div>
-        <div class="item"><a href="">Abous Us</a></div>
-        <div class="item"><a href="">Contacts</a></div>
-        <form class="item">
-            <input type="search" id="searchform" placeholder="Let's start!">
-            <button id="searchbutt" type="submit" name="searchbutt">Find</button>
-        </form>
-    </div>
-    <div class="headercont">
-        <div class="reg"><a href="">Sign In or Register</a></div>
-    </div>
-</header>
-<div class="title"><span><h3>Student Page<h3></span></div>
+<jsp:include page="header/header.jsp"/>
 
-<div class="lecturer">
-    <center>
-        <div class = "circle">
-            <img src="img/lecturer/customer.png" alt="Users photo">
+<div class="title">Student Page</div>
+  <div class="content">
+    <div class="lecturer">
+      <h3><p align="center"><%=request.getAttribute("student_name")%></p></h3>
+        <h4><p align="center">student</p></h4>
+        <div id="personal_info">
+            <div class="lecturer_info" >
+              <details>
+                <summary>Personal information</summary>
+                <p id="persinfo"><%=request.getAttribute("student_description")%></p>
+              </details>
+            </div>
         </div>
-    </center>
-    <div class="info">
-        <h3><p align="center"><%=request.getAttribute("student_name")%></p></h3>
-        <h4><p align="center">Student</p></h4>
-        <span><h4><p align="center">Topics:</p></h4></span>
-        <h5><p align="center"> Topic 1: average mark 5.0</p></h5>
-        <h5><p align="center"> Topic 2: average mark 5.0</p></h5>
-    </div>
-</div>
-<div class = "course_column">
-    <div class="personal_info">
-        <h3><p align="center">Personal information</p></h3>
-        <div class="lecturer_info" >
-            <p><%=request.getAttribute("student_description")%></p>
-        </div>
-    </div>
+      </div>
+      <div class = "course_column">
 
-    <div class="courses_info">
-        <h3><p align="center">In process:</p></h3>
+          <div class="courses_info">
+              <div class="hdr">My courses</div><br/>
+              <div class="courseH">In process:</div>
         <%
             for (int i = 1; i < n; i++)
                 if (request.getAttribute("course_mark"+i).equals("")){
         %>
-        <div class="course" >
-            <h4><p align="center"><a href="" style="color: #000000">Unsubscribe</a></p></h4>
-            <h4><p align="center"><a href="" style="color: #000000"><%=request.getAttribute("course_name"+i)%></a></p></h4>
-            <p>Description: <%=request.getAttribute("course_description"+i)%></p>
+        <div class="course">
+          <h4><a href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"><%=request.getAttribute("course_name"+i)%></a></h4>
+          <button id="butCheck">Unsubscribe</button>
         </div>
-        <div class = "course_header"><h3><p align="center">Complited:</p></h3></div>
         <%
                 }
         %>
-
+              <div class="courseH">Complited: </div>
         <%
             for (int i = 1; i < n; i++)
                 if (!request.getAttribute("course_mark"+i).equals("")){
         %>
         <div class="course" >
-            <h4><p align="center">Mark: <%=request.getAttribute("course_mark"+i)%></p></h4>
-            <h4><p align="center"><a href="" style="color: #000000"><%=request.getAttribute("course_name"+i)%></a></p></h4>
-            <p>Description: <%=request.getAttribute("course_description"+i)%></p>
+            <h4><a href="'course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>'"><%=request.getAttribute("course_name"+i)%></a></h4>
+            <div id="mark"><h4>Mark: <%=request.getAttribute("course_mark"+i)%></h4></div>
         </div>
-
         <%
                 }
         %>
 
     </div>
 </div>
-<footer class="foot">
-    <div class="footcont">
-        <div class="contact">
-            <p><strong>Contacts:</strong></p>
-            <p>maxuaforever@gmail.com</p>
-        </div>
-        <div class="copyright">
-            <p>&copy 2009 - 2018 All rights reserved</p>
-        </div>
-    </div>
-</footer>
 </body>
 </html>

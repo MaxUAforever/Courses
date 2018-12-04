@@ -170,11 +170,11 @@
     <h2 id="lessonsTitle">Lessons</h2>
 
     <%
-    boolean flag = false;
-    if (request.getAttribute("current_test") == null)
-        flag = true;
+        boolean flag = false;
+        if (request.getAttribute("current_test") == null)
+            flag = true;
 
-    for (int i = 1; i < n; i++){
+        for (int i = 1; i < n; i++){
     %>
     <div id="lectureInfo">
         <div id="lectureHead">
@@ -189,26 +189,9 @@
             <p id="lorem"><%=request.getAttribute("less_description"+i)%></p>
         </div>
         <div id="bottom">
-            <%if ((flag)&&(request.getAttribute("less_test"+i) != null))
-            {
-                if (!user.equals(request.getAttribute("course_lecturer")))
-                {%>
-                    <h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3>
-                    <%flag = false;
-                }
-                else if (user.equals(request.getAttribute("course_lecturer")))
-                {%>
-                    <h3><a id="testRef" href="edittest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Edit test</a></h3>
-                <%}
-            }
-            else
-            {
-                if (user.equals(request.getAttribute("course_lecturer")))
-                {%>
-                    <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
-                <%}
-            }%>
-
+            <%if ((flag)&&(request.getAttribute("less_test"+i) != null)&&(!user.equals(request.getAttribute("course_lecturer"))))
+                {%><h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3><% flag = false;
+            }else if (user.equals(request.getAttribute("course_lecturer"))){%><h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3><%}%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>
             <div id="buttOfLectureInfo">
                 <button type="button" name="button">Edit</button>
@@ -219,8 +202,8 @@
     </div>
     <%
         if ((request.getAttribute("current_test") != null)&&(request.getAttribute("current_test").toString().equals(request.getAttribute("less_id"+i).toString())))
-            flag = true;
-    }
+        flag = true;
+        }
     %>
 
     <!--<div id="lectureInfo">

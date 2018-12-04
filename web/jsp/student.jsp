@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/lecturer.css">
 </head>
 <body>
-<jsp:include page="header/header.jsp"/>
+
 <%
     Class.forName("com.mysql.jdbc.Driver");
 
@@ -67,6 +67,8 @@
         n++;
     }
 %>
+
+<jsp:include page="header/header.jsp"/>
 
 <div class="title">Student Page</div>
   <div class="content">

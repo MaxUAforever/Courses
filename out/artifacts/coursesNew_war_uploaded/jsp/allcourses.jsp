@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class = "pageButt">
-                <button id="subscribeCourse" type="button"  name="buttonSub">Subscribe</button>
+                <button id="subscribeCourse" onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')" type="button"  name="buttonSub">Subscribe</button>
                 <button id="showMoreButt"  onclick="pageRedirect('course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')" type="button"  name="button">Show More</button>
             </div>
         </div>

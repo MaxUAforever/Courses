@@ -5,7 +5,7 @@
 </head>
 <body>
 <%
-  response.sendRedirect("jsp/addtest.jsp");
+  response.sendRedirect("jsp/login.jsp");
 %>
 </body>
 </html>

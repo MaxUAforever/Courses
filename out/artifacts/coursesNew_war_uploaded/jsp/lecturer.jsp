@@ -123,6 +123,7 @@
         <%
             }
         %>
+        <h5><p align="center"><a href="list_of_students.jsp">Subscribed students</a></p></h5>
     </div>
 </div>
 <div class = "course_column">
