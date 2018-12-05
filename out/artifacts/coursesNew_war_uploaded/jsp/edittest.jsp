@@ -148,8 +148,6 @@
         <%}
         }%>
         <br>
-        <button class="button" type="button" id="button_main" onclick="save_test();">Save Test</button>
-        <button class="button" type="button" id="button_main" onclick="openPopUpConf()">Cancel</button>
 
 
         <input type="text" name="test_id" id="test_id" value="<%=test_id%>" style="display:none;"/>
@@ -168,6 +166,11 @@
         <%}
         }
         }%>
+        <div id="testContent"></div>
+        <div class="testButtons">
+            <button class="button" type="button" id="button_main" onclick="save_test();">Save Test</button>
+            <button class="button" type="button" id="button_main" onclick="openPopUpConf()">Cancel</button>
+        </div>
     </form>
 
     <div class="popupconfcont" id="popupconfcont">

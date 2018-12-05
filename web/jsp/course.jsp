@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -139,25 +139,9 @@
         subscribe = true;
     }
 %>
-<div id="coursetitle">
-    <h1 id="title">Course information</h1>
-    <div id="voiceBlock"></div>
-    <!--<h4 id="voice">100 voices</h4>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-        <span>&#9734;</span>
-    </div>-->
-</div>
-<div id="titleLine">
-    <hr align="center" width="95%" size="2" color="#000000" />
-    <br />
-</div>
-</div>
-<!-- End title block -->
-<!-- Main block -->
-<!-- navigate block -->
+<!-- Navigate block -->
+<h1 id="title">Course information</h1>
+
 <div class="leftCol">
     <div id="navig">
         <h2 id="navTitle">Education plan</h2>
@@ -165,8 +149,6 @@
             for (int i = 1; i < n; i++){
         %>
         <h3><span>•</span><a class="lecture_link" <%if ((!user.equals(request.getAttribute("course_lecturer")))&&(subscribe)){%> href="lecture.jsp?lecture_id=<%=request.getAttribute("less_id"+i)%>" <%} else if (user.equals(request.getAttribute("course_lecturer"))){%> href="editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>" <%}%>><%=request.getAttribute("less_name"+i)%></a></h3>
-        <!--<h3><span>-</span><a href="#">Lecture 2</a></h3>
-        <h3><span>-</span><a href="#">Lecture 3</a></h3>-->
         <%
             }
         %>
@@ -183,6 +165,7 @@
     else{
         %>
     <button id="subscribeCourse" <%if (subscribe){ %> onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=course_id%>')" <%} else{ %> onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=course_id%>')" <%}%> type="button"  name="buttonSub"><%if(!subscribe){%>Subscribe<%} else{%>Unsubscribe<%}%></button>
+    <%if(subscribe){%><button id="subscribeCourse">Pass exam</button><%}%>
     <%
     }%>
 </div>
@@ -191,23 +174,23 @@
 <div class="rightCol">
     <div id="courseInfo">
         <h2 id="courseInfoTitle" <%if (!edit.equals("false")){ %>contenteditable="true"<%}%>><%=request.getAttribute("course_name")%></h2>
-        <div id="lecturerBlock">
-            <h3 id="lecturer">Lecturer:</h3>
+        <div class = blockRow id="lecturerBlock">
+            <div id="lecturer">Lecturer:</div>
             <div id="lecturerOfCourse" <%if (!edit.equals("false")){ %>contenteditable="true"<%}%>><%=request.getAttribute("course_lecturer")%></div>
         </div>
-        <div id="themeBlock">
-            <h3 id="theme">Theme:</h3>
+        <div class = blockRow id="themeBlock">
+            <div id="theme">Theme:</div>
             <div id="themeOfCourse" <%if (!edit.equals("false")){ %>contenteditable="true"<%}%>><%=request.getAttribute("course_theme")%></div>
         </div>
-        <h3 id="desc">Description:</h3>
-        <div id="text">
+        <div class = blockRow>
+        <div id="desc">Description:</div>
+        <div class= "ddesc" id="text">
             <p id="lorem" <%if (!edit.equals("false")){ %>contenteditable="true"<%}%>><%=request.getAttribute("course_description")%></p>
+        </div>
         </div>
         <%if (user.equals(request.getAttribute("course_lecturer"))){%>
         <div id="buttOfCourseInfo">
-            <!--<form action="editsavecourse.jsp" method="post" class="courseedit">-->
-            <!--<a href="editsavecourse.jsp?course_id=<%//=course_id%>&edit=<%//=edit%>">--><button type="button" onclick="call('<%=course_id%>', '<%=edit%>')" name="button"><%if (edit == "true"){%>Save<%} else{System.out.println("Meow " + edit);%>Edit<%}%></button><!--</a>-->
-            <!--</form>-->
+            <button type="button" onclick="call('<%=course_id%>', '<%=edit%>')" name="button"><%if (edit == "true"){%>Save<%} else{System.out.println("Meow " + edit);%>Edit<%}%></button>
             <button type="button" onclick="openPopUpConf()" name="button">Delete</button>
         </div>
         <%}%>
@@ -247,16 +230,16 @@
             {
                 if ((request.getAttribute("less_test"+i) != null))
                 {%>
-                    <h3><a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a></h3>
+                    <a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a>
                 <%}
                 else
                 {%>
-                    <h3><a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a></h3>
+                    <a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a>
                 <%}
             }%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>
             <div id="buttOfLectureInfo">
-                <button type="button" onclick="pageRedirect('editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>')" name="button">Edit</button>
+                <button type="button" id = "editB" onclick="pageRedirect('editlecture.jsp?course_id=<%=course_id%>&lecture_id=<%=request.getAttribute("less_id"+i)%>')" name="button">Edit</button>
                 <button type="button" onclick="openPopUpLess('<%=request.getAttribute("less_id"+i)%>')" name="button">Delete</button>
             </div>
             <%}%>

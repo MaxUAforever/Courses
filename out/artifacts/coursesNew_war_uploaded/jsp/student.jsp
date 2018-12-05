@@ -61,7 +61,7 @@
         else
             request.setAttribute("description"+n, "");
         if (rs.getString("mark") != null)
-            request.setAttribute("course_mark"+n, rs.getString("mark"));
+            request.setAttribute("course_mark"+n, rs.getInt("mark"));
         else
             request.setAttribute("course_mark"+n, "");
         n++;
@@ -95,7 +95,7 @@
         %>
         <div class="course">
           <h4><a href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"><%=request.getAttribute("course_name"+i)%></a></h4>
-          <button id="butCheck">Unsubscribe</button>
+          <button id="butCheck" onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')">Unsubscribe</button>
         </div>
         <%
                 }
