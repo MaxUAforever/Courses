@@ -74,14 +74,15 @@
             <input type="number" id="mark_id" value="1" min="1"/>
         </div>-->
         <br>
-        <div class="testButtons">
-        <button class="button" id="button_main" onclick="save_test();">Save Test</button>
-        <button class="button" type="button" id="button_main" name="button_cancel" onclick="openPopUpConf()">Cancel</button>
-            </div>
 
         <input type="text" name="course_id" id="course_id" value="<%=c_id%>" style="display:none;"/>
         <input type="text" name="lesson_id" id="lesson_id" value="<%=l_id%>" style="display:none;"/>
         <input type="text" name="quest_count" id="quest_count_id" style="display:none;"/>
+        <div id="questContent"></div>
+        <div class="testButtons">
+            <button class="button" id="button_main" onclick="save_test();">Save Test</button>
+            <button class="button" type="button" id="button_main" name="button_cancel" onclick="openPopUpConf()">Cancel</button>
+        </div>
     </form>
 </div>
 <div class="popupconfcont" id="popupconfcont">

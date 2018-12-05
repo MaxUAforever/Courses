@@ -31,7 +31,7 @@ function save_test(){
 }*/
 
 function add_open(){
-    var p = document.getElementById("rightcol_id");
+    var p = document.getElementById("questContent");
     var new_open = document.createElement("div");
     new_open.setAttribute("id", "edit_open_id");
     new_open.setAttribute("class","edit_open");
@@ -45,6 +45,14 @@ function add_open(){
     question_div.setAttribute("role", "textbox");
     question_div.setAttribute("aria-multiline", "true");
 
+    var btn_del = document.createElement("input");
+    btn_del.type = "image";
+    btn_del.src = "img/dlt.jpg"
+    btn_del.setAttribute("type", "image");
+    btn_del.setAttribute("id", "buttonDel");
+    btn_del.setAttribute("alt", "Delete");
+    btn_del.setAttribute("onclick", "this.parentNode.parentNode.removeChild(this.parentNode);");
+
     var question_area = document.createElement("textarea");
     question_area.name = "quest" + q_num;
     question_area.setAttribute("class", "question_area"/* + q_num*/);
@@ -54,16 +62,18 @@ function add_open(){
     var lbl2 = document.createElement("label");
     lbl2.name = "lbl2";
     lbl2.setAttribute("class","lbl");
-    lbl2.innerHTML = "Mark for question:";
+    lbl2.innerHTML = "Mark for question:&nbsp;";
 
     var mark = document.createElement("input");
     mark.name = "mark" + q_num;
+    mark.setAttribute("class","num_input");
     mark.setAttribute("id","number_id");
     mark.setAttribute("type", "number");
     mark.setAttribute("value", "1");
     mark.setAttribute("min", "1");
 
     p.appendChild(new_open);
+    new_open.appendChild(btn_del);
     new_open.appendChild(lbl2);
     new_open.appendChild(mark);
     new_open.appendChild(question_div);
@@ -73,7 +83,7 @@ function add_open(){
 };
 
 function add_close() {
-    var p = document.getElementById("rightcol_id");
+    var p = document.getElementById("questContent");
     var new_test = document.createElement("div");
     new_test.name = "test" + q_num;
     new_test.setAttribute("class", "edit_test");
@@ -87,6 +97,14 @@ function add_close() {
     question_div.setAttribute("role", "textbox");
     question_div.setAttribute("aria-multiline", "true");
 
+    var btn_del = document.createElement("input");
+    btn_del.type = "image";
+    btn_del.src = "img/dlt.jpg"
+    btn_del.setAttribute("type", "image");
+    btn_del.setAttribute("id", "buttonDel");
+    btn_del.setAttribute("alt", "Delete");
+    btn_del.setAttribute("onclick", "this.parentNode.parentNode.removeChild(this.parentNode);");
+
     var question_area = document.createElement("textarea");
     question_area.name = "quest" + q_num;
     question_area.setAttribute("class", "question_area"/* + q_num*/);
@@ -96,10 +114,12 @@ function add_close() {
     var lbl = document.createElement("label");
     lbl.name = "lbl1";
     lbl.setAttribute("class","lbl");
-    lbl.innerHTML = "Number of answers (2-10):";
+    lbl.setAttribute("id", "lbl_ans_num");
+    lbl.innerHTML = "Number of answers (2-10):&nbsp;";
 
     var numb = document.createElement("input");
     numb.name = "ans_cnt" + q_num;
+    numb.setAttribute("class","num_input");
     numb.setAttribute("id","number_id");
     numb.setAttribute("onchange", "add_answers(this);");
     //numb.setAttribute("onclick", "add_answers(this);");
@@ -112,20 +132,23 @@ function add_close() {
     var lbl2 = document.createElement("label");
     lbl2.name = "lbl2";
     lbl2.setAttribute("class","lbl");
-    lbl2.innerHTML = "Mark for question:";
+    lbl2.setAttribute("id", "lbl_quest_mark");
+    lbl2.innerHTML = "Mark for question:&nbsp;";
 
     var mark = document.createElement("input");
     mark.name = "mark" + q_num;
+    mark.setAttribute("class","num_input");
     mark.setAttribute("id","number_id");
     mark.setAttribute("type", "number");
     mark.setAttribute("value", "1");
     mark.setAttribute("min", "1");
 
-    new_test.appendChild(lbl);
-    new_test.appendChild(numb);
+    new_test.appendChild(btn_del);
     new_test.appendChild(lbl2);
     new_test.appendChild(mark);
     new_test.appendChild(question_div);
+    new_test.appendChild(lbl);
+    new_test.appendChild(numb);
     new_test.appendChild(question_area);
 
     for (var i = 0; i < 2; i++) {
@@ -147,14 +170,17 @@ function add_close() {
         var lbl2 = document.createElement("label");
         lbl2.name = "lbl2";
         lbl2.setAttribute("class","lbl");
-        lbl2.innerHTML = "Mark for answer:";
+        lbl2.setAttribute("id", "lbl_ans_mark");
+        lbl2.innerHTML = "Mark (0..1):&nbsp;";
 
         var coef = document.createElement("input");
         coef.name = i + "coef" + q_num;
+        coef.setAttribute("class","num_input");
         coef.setAttribute("id","number_id");
         coef.setAttribute("type", "number");
         coef.setAttribute("value", "0");
         coef.setAttribute("min", "0");
+        coef.setAttribute("step", "0.1");
 
         new_test.appendChild(answer_div);
         new_test.appendChild(answer_area);
@@ -169,7 +195,7 @@ function add_close() {
 
 function add_answers(elem){
     var par = elem.parentElement;
-    var cnt = par.childElementCount - 4;
+    var cnt = par.childElementCount - 6;
     var cnt_new = elem.value*4;
     var flag = true;
     var cur_q_num = par.name.substring(4);
@@ -202,14 +228,17 @@ function add_answers(elem){
                 var lbl2 = document.createElement("label");
                 lbl2.name = "lbl2";
                 lbl2.setAttribute("class","lbl");
-                lbl2.innerHTML = "Mark for answer:";
+                lbl2.setAttribute("id", "lbl_ans_mark");
+                lbl2.innerHTML = "Mark (0..1):&nbsp;";
 
                 var coef = document.createElement("input");
                 coef.name = i + "coef" + q_num;
+                coef.setAttribute("class","num_input");
                 coef.setAttribute("id","number_id");
                 coef.setAttribute("type", "number");
                 coef.setAttribute("value", "0");
                 coef.setAttribute("min", "0");
+                coef.setAttribute("step", "0.1");
 
                 par.appendChild(answer_div);
                 par.appendChild(answer_area);
@@ -225,10 +254,9 @@ function add_answers(elem){
             if (flag == false)
                 par.children[i+4].remove();
             else
-               flag = false;
+                flag = false;
         }
     }
 
     par.update();
 };
-
