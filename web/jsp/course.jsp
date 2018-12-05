@@ -165,7 +165,7 @@
     else{
         %>
     <button id="subscribeCourse" <%if (subscribe){ %> onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=course_id%>')" <%} else{ %> onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=course_id%>')" <%}%> type="button"  name="buttonSub"><%if(!subscribe){%>Subscribe<%} else{%>Unsubscribe<%}%></button>
-    <%if(subscribe){%><button id="subscribeCourse">Pass exam</button><%}%>
+    <%if((exam != null)&&(subscribe)&&((request.getAttribute("less_id"+(n-1))).toString().equals(request.getAttribute("current_test").toString()))){%><button id="subscribeCourse" onclick="pageRedirect('passtest.jsp?test_id=<%=exam%>')">Pass exam</button><%}%>
     <%
     }%>
 </div>
