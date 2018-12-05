@@ -92,7 +92,7 @@ img {
 }
 
 .hdr {
-  margin-top: 15px;
+  margin-top: 18px;
   background-color:#2b4d68;
   height: 25px;
   text-align: center;
@@ -196,6 +196,23 @@ text-decoration: none;
     color: #000000;
     text-underline: black;
     text-decoration: none;
+}
+
+#add_div{
+    color: black;
+    float: right;
+    /*height: 25px;
+    font-size: 18px;*/
+    font-family: Helvetica;
+    background: linear-gradient(to right, #ffffff, #2b4d68,#2b4d68);
+    text-align: right;
+    color: white;
+    padding-right: 3px;
+    width: 100px;
+}
+
+.linktoadd{
+    color: white;
 }
 
 course h4 p a{

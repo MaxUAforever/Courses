@@ -109,6 +109,9 @@
 </div>
 <div class = "course_column">
     <div class="courses_info">
+        <div id="add_div">
+            <a class="linktoadd" href="addcourse.jsp">+ Add</a>
+        </div>
         <div class="hdr">My courses:</div><br/>
         <%
             for (int i = 1; i < n; i++){
