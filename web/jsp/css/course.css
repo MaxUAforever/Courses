@@ -1,108 +1,12 @@
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background: #78c4ff;
-  font-family: Helvetica;
-  border-radius: 5px 5px 0 0;
-  border-bottom: 2px solid #627F9E;
-}
-
-header headercount {
-  display: flex;
-  justify-content: space-between;
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.logo {
-  position: absolute;
-}
-
-.logo img{
-  height: 60px;
-}
-
-.item {
-  margin-top:10px;
-  display: inline;
-  font-weight: bold;
-  padding: 3px 30px;
-  font-size: 16px;
-}
-
-.reg {
-  width: 100px;
-  position: absolute;
-  display:inline;
-  font-weight: bold;
-  font-size: 14px;
-  margin-left: 85%;
-  margin-top: 1%;
-}
-form {
-  width: 250px;
-  height: 20px;
-  border-radius: 5px;
-}
-
-form p{
-  border: black 5px;
-  height: 20px;
-  border-radius: 5px;
-  width: 250px;
-}
-
-form p input {
-  position: absolute;
-  top:30px;
-  width: 230px;
-  height: 20px;
-  border: none;
-  background: #ffffff;
-  color: #9E9C9C;
-  border-radius: 5px 0 0 5px;
-}
-
-#buttonSearch{
-  background: white;
-  border-radius: 0 5px 5px 0;
-  margin-left: 230px;
-  height: 20px;
-  width:20px;
-}
-
-.starsRate {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  padding-left: 15px;
-}
-
-.starsRate > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-}
-
-.starsRate > span:hover:before,
-.starsRate > span:hover ~ span:before {
-  content: "\2605";
-  position: absolute;
-}
-
 #title {
-  float: left;
-  margin-left: 5%;
-  margin-top: 2%;
-}
-
-#voiceBlock {
-  display: flex;
-  padding-top: 10px;
-  float: right;
-  margin-right: 5%;
-  margin-top: 2%;
+  margin-top: 5px;
+  height:22px;
+  width: auto;
+  background: linear-gradient(to right, #ffffff, #2b4d68, #ffffff);
+  font-size: 20px;
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
 }
 
 .leftCol {
@@ -112,9 +16,11 @@ form p input {
 }
 
 #navig {
+  font-family: Helvetica;
+  font-size: 15px;
   padding: 20px;
   background: #ffffff;
-  box-shadow: 0 7px 11px 0 rgba(0, 0, 0, 0.6), 0 9px 19px 0 rgba(0, 0, 0, 0.57);
+  border: 2px solid #2b4d68;
 }
 
 #navTitle {
@@ -167,9 +73,11 @@ button:hover {
 }
 
 #courseInfo {
+  font-family: Helvetica;
+  font-size: 15px;
   padding: 20px;
   background: #ffffff;
-  box-shadow: 0 7px 11px 0 rgba(0, 0, 0, 0.6), 0 9px 19px 0 rgba(0, 0, 0, 0.57);
+  border: 2px solid #2b4d68;
 }
 
 #courseInfoTitle{
@@ -177,22 +85,22 @@ button:hover {
 }
 
 #themeBlock {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+
 }
 
 #theme {
-  text-indent: 28px;
   padding-right: 15px;
+  font-weight:bold
 }
 
 #desc {
-  text-indent: 28px;
+  padding-right: 15px;
+  font-weight:bold
 }
 
-#lorem {
-  text-indent: 28px;
+.ddesc{
+  word-wrap: break-word;
+  width: 70%;
 }
 
 #buttOfCourseInfo {
@@ -218,6 +126,7 @@ button:hover {
 
 #lessonsTitle {
   text-align: center;
+  font-family: Helvetica;
 }
 
 #lessonNum {
@@ -229,10 +138,40 @@ button:hover {
   justify-content: center;
 }
 
+#testRef{
+  font-size: 18px;
+  width: 200px;
+  height: 20px;
+  margin-left: 0;
+  margin-top: 3%;
+  color: white;
+  background: linear-gradient(to left, #ffffff, #2b4d68,#2b4d68);
+  text-decoration: none;
+}
+
+#lecturer{
+  padding-right: 15px;
+  font-weight:bold
+}
+
+#lecturerBlock{
+
+}
+
+.blockRow{
+  font-family: Helvetica;
+  font-size: 18px;
+  display: flex;
+  margin-left:20px;
+  margin-right: 20px;
+}
+
 #lectureInfo {
+  font-family: Helvetica;
+  font-size: 18px;
   padding: 20px;
   background: #ffffff;
-  box-shadow: 0 7px 11px 0 rgba(0, 0, 0, 0.6), 0 9px 19px 0 rgba(0, 0, 0, 0.57);
+  border: 2px solid #2b4d66;
   margin-bottom: 20px;
 }
 
@@ -407,11 +346,9 @@ button:hover {
 }
 
 #subscribeCourse {
-  margin: 0 auto;
-  display:inline;
-  color: white;
+  margin-top: 10px;
   height: 35px;
-  width: 120px;
+  width: 100%;
   border: 2px solid #2b4d66;
   color: #2b4d66;
   font-size: 18px;

@@ -35,7 +35,7 @@ function set_num(){
 }*/
 
 function add_open(){
-    var p = document.getElementById("rightcol_id");
+    var p = document.getElementById("testContent");
     var new_open = document.createElement("div");
     new_open.setAttribute("id", "edit_open_id");
     new_open.setAttribute("class","edit_open");
@@ -77,7 +77,7 @@ function add_open(){
 };
 
 function add_close() {
-    var p = document.getElementById("rightcol_id");
+    var p = document.getElementById("testContent");
     var new_test = document.createElement("div");
     new_test.name = "test" + q_num;
     new_test.setAttribute("class", "edit_test");
