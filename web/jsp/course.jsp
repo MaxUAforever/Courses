@@ -12,7 +12,6 @@
 <body>
 <jsp:include page="header/header.jsp"/>
 <%
-    session.setAttribute("name", "student");
     String course_id = request.getParameter("course_id");
 
     String edit = "false";

@@ -33,14 +33,7 @@
         PreparedStatement pst2 = null;
 
         try {
-            pst2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
-        } catch (SQLException e) {
-            out.println("SQL query creating error");
-        }
-        pst2.executeQuery();
-
-        try {
-            pst2 = conn.prepareStatement("REPLACE INTO answer(id, question, a_text, coefficient) VALUES(?, ?, ?, ?)");
+            pst2 = conn.prepareStatement("INSERT INTO answer(id, question, a_text, coefficient) VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE question = ?, a_text = ?, coefficient = ?");
         } catch (SQLException e) {
             out.println("SQL query creating error");
         }
@@ -49,15 +42,25 @@
         pst2.setString(2, rs.getString("question"));
         pst2.setString(3, rs.getString("a_text"));
         pst2.setString(4, coefficient);
+        pst2.setString(5, rs.getString("question"));
+        pst2.setString(6, rs.getString("a_text"));
+        pst2.setString(7, coefficient);
 
         pst2.executeUpdate();
+    }
 
-        try {
-            pst2 = conn.prepareStatement("SET FOREIGN_KEY_CHECKS=1");
-        } catch (SQLException e) {
-            out.println("SQL query creating error");
-        }
-        pst2.executeQuery();
+    try {
+        pst = conn.prepareStatement("SELECT isExam FROM test WHERE id = ?");
+    } catch (SQLException e) {
+        out.println("SQL query creating error");
+    }
+
+    pst.setString(1, test_id);
+
+    rs = pst.executeQuery();
+    String isExam = "0";
+    if(rs.next()) {
+        isExam = rs.getString("isExam");
     }
 
     try {
@@ -75,31 +78,70 @@
         sum+=Double.parseDouble(rs.getString("coefficient"))*Integer.parseInt(rs.getString("points"));
     }
 
-    try {
-        pst = conn.prepareStatement("SELECT studentlesson.id, studentlesson.lesson, studentlesson.page FROM studentlesson INNER JOIN (lesson INNER JOIN test ON test.lesson = lesson.id) ON studentlesson.lesson = lesson.id WHERE test.id = ? AND studentlesson.student = ?");
-    } catch (SQLException e) {
-        out.println("SQL query creating error");
-    }
+    if(isExam.equals("0")) {
 
-    pst.setString(1, test_id);
-    pst.setString(2, student);
-
-    rs = pst.executeQuery();
-    if(rs.next()) {
-        PreparedStatement pst2 = null;
         try {
-            pst2 = conn.prepareStatement("REPLACE INTO studentlesson(id, student, lesson, page, mark) VALUES(?, ?, ?, ?, ?)");
+            pst = conn.prepareStatement("SELECT studentlesson.id, studentlesson.lesson, studentlesson.page FROM studentlesson INNER JOIN (lesson INNER JOIN test ON test.lesson = lesson.id) ON studentlesson.lesson = lesson.id WHERE test.id = ? AND studentlesson.student = ?");
         } catch (SQLException e) {
             out.println("SQL query creating error");
         }
 
-        pst2.setString(1, rs.getString("id"));
-        pst2.setString(2, student);
-        pst2.setString(3, rs.getString("lesson"));
-        pst2.setString(4, rs.getString("page"));
-        pst2.setInt(5, sum);
+        pst.setString(1, test_id);
+        pst.setString(2, student);
 
-        pst2.executeUpdate();
+        rs = pst.executeQuery();
+        if (rs.next()) {
+
+            PreparedStatement pst2 = null;
+            try {
+                pst2 = conn.prepareStatement("INSERT INTO studentlesson(id, student, lesson, page, mark) VALUES(?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE student = ?, lesson = ?, page = ?, mark = ?");
+            } catch (SQLException e) {
+                out.println("SQL query creating error");
+            }
+
+            pst2.setString(1, rs.getString("id"));
+            pst2.setString(2, student);
+            pst2.setString(3, rs.getString("lesson"));
+            pst2.setString(4, rs.getString("page"));
+            pst2.setInt(5, sum);
+            pst2.setString(6, student);
+            pst2.setString(7, rs.getString("lesson"));
+            pst2.setString(8, rs.getString("page"));
+            pst2.setInt(9, sum);
+
+            pst2.executeUpdate();
+        }
+    }
+    else{
+        try {
+            pst = conn.prepareStatement("SELECT subscribe.id, subscribe.course, subscribe.student FROM subscribe INNER JOIN (course INNER JOIN test ON test.lesson = course.id) ON subscribe.course = course.id WHERE test.id = ? AND subscribe.student = ?");
+        } catch (SQLException e) {
+            out.println("SQL query creating error");
+        }
+
+        pst.setString(1, test_id);
+        pst.setString(2, student);
+
+        rs = pst.executeQuery();
+        if (rs.next()) {
+
+            PreparedStatement pst2 = null;
+            try {
+                pst2 = conn.prepareStatement("INSERT INTO subscribe(id, student, course, mark) VALUES(?, ?, ?, ?) ON DUPLICATE KEY UPDATE student = ?, course = ?, mark = ?");
+            } catch (SQLException e) {
+                out.println("SQL query creating error");
+            }
+
+            pst2.setString(1, rs.getString("id"));
+            pst2.setString(2, student);
+            pst2.setString(3, rs.getString("course"));
+            pst2.setInt(4, sum);
+            pst2.setString(5, student);
+            pst2.setString(6, rs.getString("course"));
+            pst2.setInt(7, sum);
+
+            pst2.executeUpdate();
+        }
     }
 
     request.setAttribute("textMsg", "Marks saved! Mark is " + sum);

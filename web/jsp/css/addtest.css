@@ -8,18 +8,18 @@
 }
 
 .title {
-  margin-top: 5px;
-  height:22px;
-  width: auto;
-  background: linear-gradient(to right, #ffffff, #2b4d68, #ffffff);
-  font-size: 20px;
-  font-family: sans-serif;
-  color: white;
-  text-align: center;
+    margin-top: 5px;
+    height:22px;
+    width: auto;
+    background: linear-gradient(to right, #ffffff, #2b4d68, #ffffff);
+    font-size: 20px;
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
 }
 
 .testButtons {
-  padding: 5px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -74,8 +74,8 @@
 }
 
 .lbl_ans{
-  padding-left: 60%;
-  margin-right: 5px;
+    padding-left: 60%;
+    margin-right: 5px;
 }
 
 
@@ -107,7 +107,7 @@
 }
 
 [contentEditable=true]:empty:not(:focus):before{
-     content:attr(data-placeholder) }
+    content:attr(data-placeholder) }
 .edit_test{
     border: 1px solid black;
     width: auto;
@@ -269,4 +269,54 @@
     width: 140px;
     height: 40px;
     text-align: center;
+}
+
+#buttonDel{
+    background: white;
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 2px;
+    float: right;
+    height: 20px;
+    width:20px;
+    background:url('images/ok.png');
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-placeholder);
+    color: darkgray;
+}
+
+.question{
+    margin-top: 3px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid gray;
+    padding: 4px;
+
+}
+
+.answer{
+    margin-top: 3px;
+    margin-left: 20px;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid gray;
+    margin-bottom: 5px;
+    width: 80%;
+}
+
+.lbl{
+    color: dimgray;
+}
+
+#lbl_ans_num{
+    margin-left: 60%;
+}
+
+#lbl_ans_mark{
+    margin-left: 400px;
+}
+
+.num_input{
+    width: 45px;
 }
