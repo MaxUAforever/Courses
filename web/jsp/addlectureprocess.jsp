@@ -1,9 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "java.sql.*" %>
-<%@ page import="org.apache.commons.fileupload.FileItem" %>
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
-
 <%@ page import = "javax.servlet.*" %>
 <%@ page import = "javax.servlet.http.*" %>
 
@@ -33,7 +29,7 @@
     String course_title = "<script>sessionStorage.getItem(\"course\")</script>";
 
     out.println(course_title);*/
-    /*Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    /*Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {

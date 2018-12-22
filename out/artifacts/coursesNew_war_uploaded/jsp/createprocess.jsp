@@ -15,7 +15,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -53,13 +53,13 @@
     pst.setString(5, info);
 
     if (pst.executeUpdate() == 1) {
-        request.setAttribute("textMsg", "User is successfully created!");
+        request.setAttribute("textMsg", "User is created!");
         %>
         <jsp:include page="admin.jsp" flush="true" />
         <%
     }
     else{
-        request.setAttribute("textMsg", "Invalid user credentials!");
+        request.setAttribute("textMsg", "Wrong user data!");
         %>
             <jsp:include page="admin.jsp" flush="true" />
         <%

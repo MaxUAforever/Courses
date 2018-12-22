@@ -12,6 +12,7 @@
 <body>
 <%
     //request.setAttribute("course_id", "4");
+    String course_id = request.getParameter("course_id");
     String test_id = request.getParameter("test_id");
     //System.out.println(request == null);
 
@@ -20,7 +21,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -85,7 +86,7 @@
         n++;
     }
 
-    try {
+    /*try {
         pst = conn.prepareStatement("SELECT course.id FROM (course INNER JOIN (lesson INNER JOIN test ON lesson.id = test.lesson) ON course.id = lesson.course) WHERE test.id = ?");
     } catch (SQLException e) {
         out.println("SQL query creating error");
@@ -99,7 +100,7 @@
     if(rs.next()) {
         course_id = rs.getString("id");
 
-    }
+    }*/
     //String isOpen = request.getAttribute("quest_isOpen" + 1);
     //System.out.println(isOpen);
 %>

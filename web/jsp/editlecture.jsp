@@ -21,14 +21,14 @@
 
     Connection conn = null;
     try {
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     } catch (SQLException e) {
         out.println("Connect error");
     }
     PreparedStatement pst = null;
 
     try {
-        pst = conn.prepareStatement("SELECT lesson.id, course.course_name, lesson.less_name, lesson.description, lesson.material FROM courses.course, courses.lesson WHERE (lesson.course = course.id) AND (lesson.id = ?)");
+        pst = conn.prepareStatement("SELECT lesson.id, course.course_name, lesson.less_name, lesson.description, lesson.material FROM course, lesson WHERE (lesson.course = course.id) AND (lesson.id = ?)");
     } catch (SQLException e) {
         out.println("SQL query creating error");
     }
@@ -63,9 +63,9 @@
     <hr>
 
     <div class="leftcol">
-        <button class="button" id="button_main" onclick="save_lecture();">Save lecture</button>
-        <button class="button" id="button_main" onclick="add_input();">+ Add text</button>
-        <button class="button" id="button_main" onclick="add_photo();">+ Add picture</button>
+
+        <!--<button class="button" id="button_main" onclick="add_input();">+ Add text</button>
+        <button class="button" id="button_main" onclick="add_photo();">+ Add picture</button>-->
     </div>
     <div class = "rightcol" id="rightcol_id">
         <div class="edit_input_title" id="edit_input_title_id" contenteditable="true" data-placeholder="Enter lecture title..." spellcheck="true"
@@ -79,6 +79,7 @@
             <input type='file' id="upload" onchange="readURL(this);"/>
             <img src="#" id="upload-img" alt="image" />
         </div>-->
+        <button class="button" id="buttonMain" onclick="save_lecture();">Save lecture</button>
     </div>
 </div>
 <form method="post" id="data_send" action="editlectureconfirm.jsp?course_id=<%=c_id%>&lecture_id=<%=l_id%>">

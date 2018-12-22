@@ -4,7 +4,6 @@
 
 <%
     //request.setAttribute("course_id", "4");
-    session.setAttribute("name", "student");
     String course_id = request.getParameter("course_id");
     String test_id = request.getParameter("test_id");
     String student = session.getAttribute("name").toString();
@@ -15,7 +14,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -144,7 +143,7 @@
         }
     }
 
-    request.setAttribute("textMsg", "Marks saved! Mark is " + sum);
+    request.setAttribute("textMsg", "Grades saved! Grade is " + sum);
 %>
 <jsp:include page="course.jsp?course_id=<%=course_id%>" flush="true" />
 <%

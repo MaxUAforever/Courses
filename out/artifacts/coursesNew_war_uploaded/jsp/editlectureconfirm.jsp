@@ -9,7 +9,7 @@
         String desc = request.getParameter("description");
         String text = request.getParameter("text");
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
         PreparedStatement pst = null;
 
         try {

@@ -62,7 +62,7 @@ function add_open(){
     var lbl2 = document.createElement("label");
     lbl2.name = "lbl2";
     lbl2.setAttribute("class","lbl");
-    lbl2.innerHTML = "Mark for question:&nbsp;";
+    lbl2.innerHTML = "Grade for question:&nbsp;";
 
     var mark = document.createElement("input");
     mark.name = "mark" + q_num;
@@ -133,7 +133,7 @@ function add_close() {
     lbl2.name = "lbl2";
     lbl2.setAttribute("class","lbl");
     lbl2.setAttribute("id", "lbl_quest_mark");
-    lbl2.innerHTML = "Mark for question:&nbsp;";
+    lbl2.innerHTML = "Grade for question:&nbsp;";
 
     var mark = document.createElement("input");
     mark.name = "mark" + q_num;
@@ -171,7 +171,7 @@ function add_close() {
         lbl2.name = "lbl2";
         lbl2.setAttribute("class","lbl");
         lbl2.setAttribute("id", "lbl_ans_mark");
-        lbl2.innerHTML = "Mark (0..1):&nbsp;";
+        lbl2.innerHTML = "Coef (0..1):&nbsp;";
 
         var coef = document.createElement("input");
         coef.name = i + "coef" + q_num;
@@ -229,7 +229,7 @@ function add_answers(elem){
                 lbl2.name = "lbl2";
                 lbl2.setAttribute("class","lbl");
                 lbl2.setAttribute("id", "lbl_ans_mark");
-                lbl2.innerHTML = "Mark (0..1):&nbsp;";
+                lbl2.innerHTML = "Coef (0..1):&nbsp;";
 
                 var coef = document.createElement("input");
                 coef.name = i + "coef" + q_num;

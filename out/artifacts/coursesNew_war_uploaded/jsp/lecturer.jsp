@@ -9,7 +9,7 @@
 <%
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     //setAttribute("lecturer", "lecturer");
@@ -105,10 +105,16 @@
                 <p id="persinfo"><%=request.getAttribute("lecturer_description")%></p>
             </details>
         </div>
+        <div>
+            <p align="center"><a class="checktestlink" href="lecturertocheck.jsp">Check tests</a></p>
+        </div>
     </div>
 </div>
 <div class = "course_column">
     <div class="courses_info">
+        <div id="add_div">
+            <a class="linktoadd" href="addcourse.jsp">+ Add</a>
+        </div>
         <div class="hdr">My courses:</div><br/>
         <%
             for (int i = 1; i < n; i++){

@@ -29,7 +29,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -147,7 +147,7 @@
         <textarea name="name" rows="10" cols="80" readonly><%=request.getAttribute("ans_stud_text" + i)%></textarea>
     </div>
     <div class="openQuestMark">
-        <p>Mark for answer:</p>
+        <p>Grade for answer:</p>
         <input type="text" name="ans<%=request.getAttribute("ans_stud_id"+i)%>">
     </div>
     </div>
@@ -156,7 +156,7 @@
     }%>
 
 
-    <button type="submit" name="button" ><!--onclick="openPopUpConf()"-->Mark</button>
+    <button type="submit" name="button" ><!--onclick="openPopUpConf()"-->Grade</button>
 
     <div class="popupconfcont" id="popupconfcont">
         <div class="popupconf" id="popupconf">

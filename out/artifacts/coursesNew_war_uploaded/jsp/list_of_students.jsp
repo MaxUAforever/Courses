@@ -15,17 +15,17 @@
   <%
       Class.forName("com.mysql.jdbc.Driver");
 
-      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
       PreparedStatement pst = null;
 
       //setAttribute("lecturer", "lecturer");
       String lecturer = session.getAttribute("name").toString(); //request.getAttribute("lecturer");
 
       try {
-          pst = conn.prepareStatement("SELECT user.login, user.user_name FROM courses.user, courses.subscribe\n" +
+          pst = conn.prepareStatement("SELECT user.login, user.user_name FROM user, subscribe\n" +
                   "WHERE (subscribe.student = user.login) and subscribe.course = (\n" +
                   "\n" +
-                  "SELECT course.id FROM courses.user, courses.course\n" +
+                  "SELECT course.id FROM user, course\n" +
                   "WHERE (user.login = ?) and (user.login = course.lecturer));");
       } catch (SQLException e) {
           out.println("SQL query creating error");

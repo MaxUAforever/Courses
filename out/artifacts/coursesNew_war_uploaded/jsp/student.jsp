@@ -12,12 +12,11 @@
 <%
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
    // request.setParameter("student", "student");
     String student = session.getAttribute("name").toString(); //request.getAttribute("lecturer");
-
     try {
         pst = conn.prepareStatement("SELECT user_name, description FROM user WHERE login = ?");
     } catch (SQLException e) {
@@ -39,7 +38,7 @@
     }
 
     try {
-        pst = conn.prepareStatement("SELECT course.id, course.course_name, course.description, subscribe.mark FROM courses.subscribe, courses.user, courses.course " +
+        pst = conn.prepareStatement("SELECT course.id, course.course_name, course.description, subscribe.mark FROM subscribe, user, course " +
                 "where (user.login = subscribe.student) and (course.id = subscribe.course) and (user.login = ?)");
     } catch (SQLException e) {
         out.println("SQL query creating error");
@@ -88,26 +87,28 @@
 
           <div class="courses_info">
               <div class="hdr">My courses</div><br/>
-              <div class="courseH">In process:</div>
+              <div class="courseH">In progress:</div>
         <%
+            int cnt = 1;
             for (int i = 1; i < n; i++)
                 if (request.getAttribute("course_mark"+i).equals("")){
         %>
         <div class="course">
-          <h4><a href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"><%=request.getAttribute("course_name"+i)%></a></h4>
-          <button id="butCheck" onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=request.getAttribute("course_id"+i)%>')">Unsubscribe</button>
+          <h4><a href="course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>"><%=cnt + ". " + request.getAttribute("course_name"+i)%></a></h4>
         </div>
         <%
+                cnt++;
                 }
         %>
               <div class="courseH">Complited: </div>
         <%
+            cnt = 1;
             for (int i = 1; i < n; i++)
                 if (!request.getAttribute("course_mark"+i).equals("")){
         %>
         <div class="course" >
-            <h4><a href="'course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>'"><%=request.getAttribute("course_name"+i)%></a></h4>
-            <div id="mark"><h4>Mark: <%=request.getAttribute("course_mark"+i)%></h4></div>
+            <h4><a href="'course.jsp?course_id=<%=request.getAttribute("course_id"+i)%>'"><%=cnt + ". " + request.getAttribute("course_name"+i)%></a></h4>
+            <div id="mark"><h4>Grade: <%=request.getAttribute("course_mark"+i)%></h4></div>
         </div>
         <%
                 }

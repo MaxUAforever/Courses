@@ -20,7 +20,7 @@
     String course_description = request.getParameter("description");
 
     Class.forName("com.mysql.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     System.out.println(course_name + " " + course_theme + " " + course_description);

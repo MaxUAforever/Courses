@@ -67,6 +67,21 @@ button:hover {
   -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
 }
 
+#buttontest{
+  padding: 5px;
+  float: left;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 15px;
+  height: 35px;
+  width: 100px;
+  text-align: center;
+}
+
 .rightCol {
   margin-left: 26%;
   padding-right: 3%;

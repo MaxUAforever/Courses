@@ -5,9 +5,6 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 
-<%@ page import="org.apache.commons.fileupload.FileItem" %>
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <html>
 <head>
     <title>Title</title>
@@ -21,7 +18,7 @@
         String desc = request.getParameter("description");
         String text = request.getParameter("text");
 
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
         PreparedStatement pst = null;
 
         try {

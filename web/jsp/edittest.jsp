@@ -14,9 +14,10 @@
 <%
     String test_id = request.getParameter("test_id");
 
+
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -104,7 +105,7 @@
         <button class="button" id="button_main" onclick="add_close();">+ Add close question</button>
         <button class="button" id="button_main" onclick="add_open();">+ Add open question</button>
     </div>
-    <form class = "rightcol" id="rightcol_id" action="addtestprocess.jsp">
+    <form class = "rightcol" id="rightcol_id" <%if (isExam.equals("1")){%>action="addtestprocess.jsp?course_id=<%=c_id%>"<%} else{%> action="addtestprocess.jsp?course_id=<%=c_id%>&lesson_id=<%=l_id%>" <%}%>>
         <div class="material_title" data-medium-editor-element="true">Questions</div>
         <input type="text" name="q_cnt" id="q_cnt" value="<%=n-1%>" style="display:none;"/>
         <%
@@ -115,7 +116,7 @@
         <div class="edit_test" id="edit_test_id" name="test<%=i%>">
             <label class="lbl">Number of answers (2-10):</label>
             <input type="number" id="number_id" value="<%=request.getAttribute("count"+i)%>" min="2" max="10" onchange="add_answers(this);"/>
-            <label class="lbl">Mark for question:</label>
+            <label class="lbl">Grade for question:</label>
             <input type="number" id="mark_id" name="mark<%=i-1%>" value="<%=request.getAttribute("quest_points"+i)%>" min="0"/>
             <div class="question" id = "question_id" name="quest<%=i-1%>" contenteditable="true"
                  spellcheck="true" data-medium-editor-element="true" role="textbox" aria-multiline="true"><%=request.getAttribute("quest_text"+i)%></div>
@@ -129,7 +130,7 @@
             <div class="answer" id = "answer_id" name="<%=j-1%>ans<%=i-1%>" contenteditable="true"
                  spellcheck="true" data-medium-editor-element="true" role="textbox" aria-multiline="true"><%=request.getAttribute(j+"ans_text"+i)%></div>
 
-            <label class="lbl">Mark for answer:</label>
+            <label class="lbl">Grade for answer:</label>
             <input type="number" id="mark_id" name="<%=j-1%>coef<%=i-1%>" value="<%=request.getAttribute(j+"ans_coef"+i)%>" min="0"/>
 
             <%}%>
@@ -142,7 +143,7 @@
             <div class="question" id = "question_id" name="quest<%=i-1%>" contenteditable="true"
                  spellcheck="true" data-medium-editor-element="true" role="textbox" aria-multiline="true"><%=request.getAttribute("quest_text"+i)%></div>
 
-            <label class="lbl">Mark for question:</label>
+            <label class="lbl">Grade for question:</label>
             <input type="number" id="mark_id" name="mark<%=i-1%>" value="<%=request.getAttribute("quest_points"+i)%>" min="1"/>
         </div>
         <%}

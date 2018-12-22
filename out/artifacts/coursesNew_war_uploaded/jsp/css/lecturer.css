@@ -92,7 +92,7 @@ img {
 }
 
 .hdr {
-  margin-top: 15px;
+  margin-top: 18px;
   background-color:#2b4d68;
   height: 25px;
   text-align: center;
@@ -103,7 +103,8 @@ img {
 
 .courseH {
   height: 25px;
-  text-align: center;
+  text-align: left;
+  margin-left: 10px;
   color: #2b4d68;
   font-size: 20px;
 }
@@ -159,8 +160,6 @@ img {
   width: 700px;
   font-size: 18px;
   margin: 20px;
-
-
 }
 
 .course h4{
@@ -170,8 +169,8 @@ img {
   height: 20px;
   width:300px;
   line-height: 100%;
-
 }
+
 #mark{
   display:inline;
   margin: auto;
@@ -198,7 +197,30 @@ text-decoration: none;
     text-decoration: none;
 }
 
+#add_div{
+    color: black;
+    float: right;
+    /*height: 25px;
+    font-size: 18px;*/
+    font-family: Helvetica;
+    background: linear-gradient(to right, #ffffff, #2b4d68,#2b4d68);
+    text-align: right;
+    color: white;
+    padding-right: 3px;
+    width: 100px;
+}
+
+.checktestlink{
+    color: white;
+    margin-top: 25px;
+}
+
+.linktoadd{
+    color: white;
+}
+
 course h4 p a{
+    margin-left: 100px;
 	color: #87CEFA;
 }
 

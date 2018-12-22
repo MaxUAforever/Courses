@@ -47,12 +47,12 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     if ((theme == null) && (search == null)){
         try {
-            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(lesson.id) AS less_count FROM course LEFT JOIN lesson ON course.id = lesson.course GROUP BY course.id");
+            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(subscribe.id) AS sub_count FROM course LEFT JOIN subscribe ON course.id = subscribe.course GROUP BY course.id");
         } catch (SQLException e) {
             out.println("SQL query creating error");
         }
@@ -60,7 +60,7 @@
     else if (search != null){
         System.out.println("Meow tut ");
         try {
-            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(lesson.id) AS less_count FROM course LEFT JOIN lesson ON course.id = lesson.course WHERE course.course_name LIKE \"%\" ? \"%\" GROUP BY course.id");
+            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(subscribe.id) AS sub_count FROM course LEFT JOIN subscribe ON course.id = subscribe.course WHERE course.course_name LIKE \"%\" ? \"%\" GROUP BY course.id");
             pst.setString(1, search);
         } catch (SQLException e) {
             out.println("SQL query creating error");
@@ -68,7 +68,7 @@
     }
     else {
         try {
-            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(lesson.id) AS less_count FROM course LEFT JOIN lesson ON course.id = lesson.course WHERE course.theme = ? GROUP BY course.id");
+            pst = conn.prepareStatement("SELECT course.id, course.lecturer, course.course_name, course.theme, course.description, COUNT(subscribe.id) AS sub_count FROM course LEFT JOIN subscribe ON course.id = subscribe.course WHERE course.theme = ? GROUP BY course.id");
             pst.setString(1, theme);
         } catch (SQLException e) {
             out.println("SQL query creating error");
@@ -83,7 +83,7 @@
         request.setAttribute("course_name"+n, rs.getString("course_name"));
         request.setAttribute("course_theme"+n, rs.getString("theme"));
         request.setAttribute("course_description"+n, rs.getString("description"));
-        request.setAttribute("course_less_count"+n, rs.getString("less_count"));
+        request.setAttribute("course_sub_count"+n, rs.getString("sub_count"));
         n++;
     }
 
@@ -128,10 +128,6 @@
                 <div id="descr"> Description:&nbsp;<%=request.getAttribute("course_description"+i)%>
                 </div>
                 <br/>
-                <div id="lessCount">
-                    <span><h4>Lessons:</h4></span>
-                    <span><h4><a href="#">&nbsp;<%=request.getAttribute("course_less_count"+i)%>&nbsp;</h4></span>
-                </div>
 
                 <div class="lectAuthor">
                     <h4>Lecturer:&nbsp;<%=request.getAttribute("course_lecturer"+i)%></h4></h4>
@@ -140,7 +136,7 @@
 
             <div class="rightPart">
                 <div id="rate">
-                    <div id="voice">n subscribers</div>
+                    <div id="voice"><%=request.getAttribute("course_sub_count"+i)%> subscribers</div>
                 </div>
             </div>
             <div class = "pageButt">

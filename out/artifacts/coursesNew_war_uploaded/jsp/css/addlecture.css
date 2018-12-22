@@ -137,17 +137,6 @@ hr {
   height: 2px;
 }
 
-.button {
-    background-color: #78c4ff;
-    float: left;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 55%;
-}
-
 .button:hover {
     opacity: 0.8;
 }
@@ -308,3 +297,23 @@ hr {
   background-color: #78c4ff;
   color: white;
 }
+
+#buttonMain{
+  padding: 5px;
+  float: right;
+  border: 2px solid #2b4d66;
+  color: #2b4d66;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 25px;
+  height: 35px;
+  width: 30%;
+  text-align: center;
+  box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -webkit-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+  -moz-box-shadow:5px 8px 9px 0px rgba(0,0,0,0.51);
+}
+
+

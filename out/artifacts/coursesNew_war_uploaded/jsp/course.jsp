@@ -28,7 +28,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -111,12 +111,13 @@
     }
 
     try {
-        pst = conn.prepareStatement("SELECT MAX(lesson.id) AS current FROM studentlesson INNER JOIN (lesson INNER JOIN course ON course.id = lesson.course) ON studentlesson.lesson = lesson.id WHERE student = ?");
+        pst = conn.prepareStatement("SELECT MAX(lesson.id) AS current FROM studentlesson INNER JOIN (lesson INNER JOIN course ON course.id = lesson.course) ON studentlesson.lesson = lesson.id WHERE student = ? AND course.id = ?");
     } catch (SQLException e) {
         out.println("SQL query creating error");
     }
 
     pst.setString(1, user);
+    pst.setString(2, course_id);
 
     rs = pst.executeQuery();
     request.setAttribute("current_test", null);
@@ -124,6 +125,7 @@
         request.setAttribute("current_test", rs.getInt("current"));
     }
 
+    System.out.println("cur: " + rs.getInt("current"));
     try {
         pst = conn.prepareStatement("SELECT id FROM subscribe WHERE student = ? AND course = ?");
         } catch (SQLException e) {
@@ -165,7 +167,7 @@
     else{
         %>
     <button id="subscribeCourse" <%if (subscribe){ %> onclick="pageRedirect('unsubscribeprocess.jsp?course_id=<%=course_id%>')" <%} else{ %> onclick="pageRedirect('subscribeprocess.jsp?course_id=<%=course_id%>')" <%}%> type="button"  name="buttonSub"><%if(!subscribe){%>Subscribe<%} else{%>Unsubscribe<%}%></button>
-    <%if(subscribe){%><button id="subscribeCourse">Pass exam</button><%}%>
+    <%if((exam != null)&&(subscribe)&&((request.getAttribute("less_id"+(n-1))).toString().equals(request.getAttribute("current_test").toString()))){%><button id="subscribeCourse" onclick="pageRedirect('passtest.jsp?course_id=<%=course_id%>&test_id=<%=exam%>')">Pass exam</button><%}%>
     <%
     }%>
 </div>
@@ -201,7 +203,7 @@
     <%
     if((subscribe)||(user.equals(request.getAttribute("course_lecturer")))){
         boolean flag = false;
-        if (request.getAttribute("current_test") == null)
+        if ((request.getAttribute("current_test") == null) || (request.getAttribute("current_test").toString().equals("0")))
             flag = true;
 
         for (int i = 1; i < n; i++){
@@ -220,9 +222,10 @@
         </div>
         <div id="bottom">
             <%if (!user.equals(request.getAttribute("course_lecturer"))) {
+                System.out.println(flag + ", " + i + ": " + request.getAttribute("current_test"));
                 if ((flag)&&(request.getAttribute("less_test"+i) != null))
                 {%>
-                    <h3><a id="testRef" href="passtest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>">Test</a></h3>
+                    <button type="button" id="buttontest" onclick="pageRedirect('passtest.jsp?course_id=<%=course_id%>&test_id=<%=request.getAttribute("less_test"+i)%>')">Test</button>
                     <%flag = false;
                 }
             }
@@ -230,11 +233,11 @@
             {
                 if ((request.getAttribute("less_test"+i) != null))
                 {%>
-                    <a id="testRef" href="edittest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Edit test</a>
+                    <button type="button" id="buttontest"onclick="pageRedirect('edittest.jsp?test_id=<%=request.getAttribute("less_test"+i)%>')">Edit test</button>
                 <%}
                 else
                 {%>
-                    <a id="testRef" href="addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>">Add test</a>
+                    <button id="buttontest" type="button" onclick="pageRedirect('addtest.jsp?course_id=<%=course_id%>&lesson_id=<%=request.getAttribute("less_id"+i)%>')">Add test</button>
                 <%}
             }%>
             <%if (user.equals(request.getAttribute("course_lecturer"))){%>

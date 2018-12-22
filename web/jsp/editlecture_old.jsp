@@ -27,7 +27,7 @@
     PreparedStatement pst = null;
 
     try {
-        pst = conn.prepareStatement("SELECT lesson.id, course.course_name, lesson.less_name, lesson.description, lesson.material FROM courses.course, courses.lesson WHERE (lesson.course = course.id) AND (lesson.id = ?)");
+        pst = conn.prepareStatement("SELECT lesson.id, course.course_name, lesson.less_name, lesson.description, lesson.material FROM course, lesson WHERE (lesson.course = course.id) AND (lesson.id = ?)");
     } catch (SQLException e) {
         out.println("SQL query creating error");
     }

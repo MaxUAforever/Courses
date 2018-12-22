@@ -22,7 +22,12 @@
         </headercount>
         <div class="reg">
             <div id="adminimg"></div>
-            <a href="lecturer.jsp" class="header_name"><%out.print(session.getAttribute("name"));%></a>
+            <%if (session.getAttribute("role").toString().equals("lecturer")){%>
+                <a href="lecturer.jsp" class="header_name"><%out.print(session.getAttribute("name"));%></a>
+            <%}
+            else if (session.getAttribute("role").toString().equals("student")){%>
+                <a href="student.jsp" class="header_name"><%out.print(session.getAttribute("name"));%></a>
+            <%}%>
             <br>
             <a href="login.jsp">Log Out</a>
         </div>

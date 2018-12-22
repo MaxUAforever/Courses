@@ -15,9 +15,15 @@
     String c_id = request.getParameter("course_id");
     String l_id = request.getParameter("lesson_id");
 
+    int isExam = 0;
+
+    if ((request.getParameter("lesson_id") == null)||(request.getParameter("lesson_id").equals("null"))) {
+        isExam = 1;
+    }
+
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -46,7 +52,7 @@
         <button class="button" id="button_main" onclick="add_open();">+ Add open question</button>
     </div>
     <%System.out.println("id: " + l_id);%>
-    <form class = "rightcol" id="rightcol_id" action="addtestprocess.jsp">
+    <form class = "rightcol" id="rightcol_id" <%if (isExam == 1){%>action="addtestprocess.jsp?course_id=<%=c_id%>"<%} else{%> action="addtestprocess.jsp?course_id=<%=c_id%>&lesson_id=<%=l_id%>" <%}%>>
         <div class="material_title" data-medium-editor-element="true">Questions</div>
         <!-- <div class="edit_test" id="edit_test_id" name="test">
             <label class="lbl">Number of answers (2-10):</label>

@@ -16,7 +16,7 @@
 
     Class.forName("com.mysql.jdbc.Driver");
 
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses?" + "user=root&password=root");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/courses_cp?" + "user=root&password=root");
     PreparedStatement pst = null;
 
     try {
@@ -37,9 +37,8 @@
     <hr>
 
     <div class="leftcol">
-        <button class="button" id="button_main" onclick="save_lecture();">Save lecture</button>
-        <button class="button" id="button_main" onclick="add_input();">+ Add text</button>
-        <button class="button" id="button_main" onclick="add_photo();">+ Add picture</button>
+        <!--<button class="button" id="button_main" onclick="add_input();">+ Add text</button>
+        <button class="button" id="button_main" onclick="add_photo();">+ Add picture</button>-->
     </div>
     <div class = "rightcol" id="rightcol_id">
         <div class="edit_input_title" id="edit_input_title_id" contenteditable="true" data-placeholder="Enter lecture title..." spellcheck="true"
@@ -53,6 +52,7 @@
             <input type='file' id="upload" onchange="readURL(this);"/>
             <img src="#" id="upload-img" alt="image" />
         </div>-->
+        <button class="button" id="buttonMain" onclick="save_lecture();">Save lecture</button>
     </div>
 </div>
 <form method="post" id="data_send" action="addlectureconfirm.jsp?course_id=<%=c_id%>">

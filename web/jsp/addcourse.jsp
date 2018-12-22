@@ -6,7 +6,7 @@
 <head>
     <title>Header part</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/addlecture.css">
+    <link rel="stylesheet" href="css/addcourse.css">
     <script src="js/addcourse.js"></script>
 </head>
 <body>
@@ -35,9 +35,9 @@
 <div class="main_layer">
     <div class="title" id="course_title">New course</div>
     <hr>
-    <div class="leftcol">
-        <button class="button" id="button_main" onclick="save_course();">Save course</button>
-    </div>
+    <!--<div class="leftcol">
+
+    </div>-->
     <div class = "rightcol" id="rightcol_id">
         <div class="edit_input_title" id="edit_input_title_id" contenteditable="true" data-placeholder="Enter course title..." spellcheck="true"
              data-medium-editor-element="true" role="textbox"></div>
@@ -47,6 +47,7 @@
         <div class="material_title" data-medium-editor-element="true">Description</div>
         <div class="edit_description" id = "edit_description_id" name="editable_desc" contenteditable="true" data-placeholder="Enter description..." spellcheck="true"
              data-medium-editor-element="true" role="textbox" aria-multiline="true"></div>
+        <button class="button" id="buttonMain" onclick="save_course();">Save course</button>
     </div>
 </div>
 <form method="post" id="data_send" action="addcourseprocess.jsp">
